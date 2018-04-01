@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hu.unideb.inf</groupId>
+    <artifactId>single-tasker</artifactId>
+    <version>0.1</version>
+
+    <name>Single Tasker</name>
+    <description>A time managing app with the help of the pomodoro technique.</description>
+    <developers>
+        <developer>
+            <name>Donka Máté</name>
+            <email>mate.salamon@gmail.com</email>
+            <url>https://github.com/m4tty-d</url>
+            <organization>DEIK</organization>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/m4tty-d/single-tasker</url>
+        <connection>scm:git:git://github.com/m4tty-d/single-tasker.git</connection>
+        <developerConnection>scm:git:git@github.com/m4tty-d/single-tasker.git</developerConnection>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+</project>
