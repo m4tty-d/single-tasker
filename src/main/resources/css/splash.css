@@ -1,0 +1,15 @@
+* {
+    -fx-font-family: 'Raleway';
+}
+
+.stack-pane {
+    -fx-background-color: #38383C;
+}
+
+.heading {
+    -fx-fill: #FAFAFB;
+}
+
+.sub-heading {
+    -fx-fill: #BABBBD;
+}
