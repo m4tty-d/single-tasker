@@ -1,14 +1,22 @@
 package models;
 
-public class Task {
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Task implements Serializable {
 
     private String name;
-    private int difficultyLevel = 0;
-    private int pomodoroCount = 0;
+    private int difficultyLevel;
+    private IntegerProperty pomodoroCount;
     private TaskState currentState;
 
     public Task(String name) {
         this.name = name;
+        this.currentState = new TaskState(TaskStateKind.FOCUS);
+        this.difficultyLevel = 0;
+        this.pomodoroCount = new SimpleIntegerProperty(0);
     }
 
     public String getName() {
@@ -28,11 +36,19 @@ public class Task {
     }
 
     public int getPomodoroCount() {
+        return pomodoroCount.get();
+    }
+
+    public IntegerProperty pomodoroCountProperty() {
         return pomodoroCount;
     }
 
     public void setPomodoroCount(int pomodoroCount) {
-        this.pomodoroCount = pomodoroCount;
+        this.pomodoroCount.set(pomodoroCount);
+    }
+
+    public void incrementPomodoroCount() {
+        this.pomodoroCount.set(this.pomodoroCount.get() + 1);
     }
 
     public TaskState getCurrentState() {
@@ -51,5 +67,22 @@ public class Task {
                 ", pomodoroCount=" + pomodoroCount +
                 ", currentState=" + currentState +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return difficultyLevel == task.difficultyLevel &&
+                pomodoroCount == task.pomodoroCount &&
+                Objects.equals(name, task.name) &&
+                Objects.equals(currentState, task.currentState);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, difficultyLevel, pomodoroCount, currentState);
     }
 }
