@@ -10,8 +10,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Font.loadFont(getClass().getResource("/fonts/Raleway-Regular.ttf").toExternalForm(), 12);
-
         Parent root = FXMLLoader.load(getClass().getResource("/views/splash.fxml"));
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);

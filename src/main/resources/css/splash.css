@@ -1,13 +1,6 @@
-* {
-    -fx-font-family: 'Raleway';
-}
-
-.stack-pane {
-    -fx-background-color: #38383C;
-}
-
 .heading {
     -fx-fill: #FAFAFB;
+    -fx-font-size: 55px;
 }
 
 .sub-heading {
