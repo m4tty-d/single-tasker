@@ -1,6 +1,7 @@
 package utils;
 
 import controllers.PomodoroController;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -12,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import models.Task;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,11 +29,16 @@ class TaskCell extends ListCell<Task> {
     private final Label pomodoroCountLabel = new Label("0");
     private static Stage pomodoroStage;
     private static DataFormat taskDataFormat = new DataFormat("task");
+    private static ContextMenu contextMenu = new ContextMenu();
+
+    private Logger logger = LoggerFactory.getLogger(TaskCell.class);
 
     public TaskCell() {
         setPomodoroCountLabelBinding();
 
         setHbox();
+
+        setContextMenu();
 
         handleEditBtnClick();
 
@@ -75,12 +83,18 @@ class TaskCell extends ListCell<Task> {
         HBox.setMargin(pomodoroCountLabel, new Insets(0, 10, 0, 0));
     }
 
+    private void setContextMenu() {
+        MenuItem deleteItem = new MenuItem();
+        deleteItem.textProperty().bind(Bindings.format("Delete \"%s\"", this.itemProperty()));
+        deleteItem.setOnAction(event -> System.out.println("adsf"));
+        contextMenu.getItems().addAll(deleteItem);
+    }
+
     private void handleTextFieldEvents() {
         textField.addEventFilter(KeyEvent.KEY_RELEASED, e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 cancelEdit();
             } else if (notSpecialKey(e)) {
-                System.out.println("changed");
                 getItem().setName(getHBoxsTextField().getText());
             }
         });
@@ -93,6 +107,7 @@ class TaskCell extends ListCell<Task> {
             }
             pomodoroStage = buildPomodoro(getItem());
             pomodoroStage.show();
+            logger.info("Pomodoro showed");
         });
     }
 
@@ -178,11 +193,14 @@ class TaskCell extends ListCell<Task> {
         try {
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error while loading pomodoro.fxml, here's some further info: {}", e.getMessage());
         }
+
+        logger.info("Pomodoro created");
 
         PomodoroController controller = loader.getController();
         controller.setTask(selectedTask);
+        logger.info("Task sent to Pomodoro");
 
         return stage;
     }

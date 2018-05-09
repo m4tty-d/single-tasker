@@ -2,6 +2,9 @@ package models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,11 +15,14 @@ public class Task implements Serializable {
     private IntegerProperty pomodoroCount;
     private TaskState currentState;
 
+    private Logger logger = LoggerFactory.getLogger(Task.class);
+
     public Task(String name) {
         this.name = name;
         this.currentState = new TaskState(TaskStateKind.FOCUS);
         this.difficultyLevel = 0;
         this.pomodoroCount = new SimpleIntegerProperty(0);
+        logger.info("Task object created");
     }
 
     public String getName() {
@@ -25,6 +31,7 @@ public class Task implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+        logger.info("Task's name set with: " + name);
     }
 
     public int getDifficultyLevel() {
@@ -33,6 +40,7 @@ public class Task implements Serializable {
 
     public void setDifficultyLevel(int difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
+        logger.info("Task's difficulty level set: " + difficultyLevel);
     }
 
     public int getPomodoroCount() {
@@ -45,6 +53,7 @@ public class Task implements Serializable {
 
     public void setPomodoroCount(int pomodoroCount) {
         this.pomodoroCount.set(pomodoroCount);
+        logger.info("Task's pomodoro count set to: " + pomodoroCount);
     }
 
     public void incrementPomodoroCount() {
@@ -57,6 +66,7 @@ public class Task implements Serializable {
 
     public void setCurrentState(TaskState currentState) {
         this.currentState = currentState;
+        logger.info("Task's current state set: ", currentState);
     }
 
     @Override

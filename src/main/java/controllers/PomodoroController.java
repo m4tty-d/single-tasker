@@ -18,6 +18,9 @@ import javafx.util.Duration;
 import models.Task;
 import models.TaskState;
 import models.TaskStateKind;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,6 +43,8 @@ public class PomodoroController implements Initializable {
     private StringProperty timerText;
     private Timeline timeline;
 
+    private Logger logger = LoggerFactory.getLogger(PomodoroController.class);
+
     public PomodoroController() {
         timerText = new SimpleStringProperty();
     }
@@ -54,6 +59,7 @@ public class PomodoroController implements Initializable {
         taskName.setText(task.getName());
         setTimerText(task.getCurrentState().getRemainingSeconds());
         // setTaskStateText();
+        logger.info("Task set in Pomodoro");
     }
 
     public String getTimerText() {
@@ -76,16 +82,19 @@ public class PomodoroController implements Initializable {
 
     public void handleStart(ActionEvent event) {
         playTimer();
+        logger.info("Pomodoro timer started");
     }
 
     public void handlePause(ActionEvent event) {
         pauseTimer();
+        logger.info("Pomodoro timer paused");
     }
 
     public void handleStop(ActionEvent event) {
+        logger.info("Pomodoro timer stopped");
+
         if (timeline != null && timeline.getStatus() == Animation.Status.RUNNING) {
             // TODO Ask user whether she wants to stop the activity
-
         } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pomodoroRate.fxml"));
 
@@ -94,14 +103,20 @@ public class PomodoroController implements Initializable {
             try {
                 stage.setScene(new Scene(loader.load()));
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Error while loading pomodoroRate.fxml, here's some further info: {}", e.getMessage());
+                return;
             }
+
+            logger.info("PomodoroRate created");
 
             PomodoroRateController controller = loader.getController();
             controller.setTask(task);
 
             root.getScene().getWindow().hide();
+            logger.info("Pomodoro hidden");
+
             stage.show();
+            logger.info("PomodoroRate showed");
         }
     }
 

@@ -7,6 +7,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import models.Task;
 import models.TaskList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.TaskCellFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,9 +23,12 @@ public class HomeController implements Initializable {
 
     private TaskList taskList = TaskList.getInstance();
 
+    private Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         taskListView.setItems(taskList.getTasks());
+        logger.info("Setting up tasks");
 
         taskListView.setEditable(true);
         taskListView.setCellFactory(new TaskCellFactory());
@@ -32,7 +37,9 @@ public class HomeController implements Initializable {
     @FXML
     void handleEnterOnNewTaskField(ActionEvent event) {
         if (newTaskFieldNotEmpty()) {
-            taskList.addTask(new Task(newTaskField.getText()));
+            String text = newTaskField.getText();
+            taskList.addTask(new Task(text));
+            logger.info("New task handled with name: " + text);
             emptyNewTaskField();
         }
     }
@@ -43,5 +50,6 @@ public class HomeController implements Initializable {
 
     private void emptyNewTaskField() {
         newTaskField.setText("");
+        logger.info("New task field emptied");
     }
 }
