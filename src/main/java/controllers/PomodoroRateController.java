@@ -11,6 +11,7 @@ import models.TaskState;
 import models.TaskStateKind;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.DifficultyLevelRangeException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,7 +44,11 @@ public class PomodoroRateController implements Initializable {
     }
 
     public void handleFinish(ActionEvent event) {
-        task.setDifficultyLevel((int) difficultySlider.getValue());
+        try {
+            task.setDifficultyLevel((int) difficultySlider.getValue());
+        } catch (DifficultyLevelRangeException e) {
+            logger.error(e.getMessage());
+        }
         task.setCurrentState(new TaskState(TaskStateKind.FINISHED));
         root.getScene().getWindow().hide();
         logger.info("Pomodoro rating finished");

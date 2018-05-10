@@ -82,11 +82,13 @@ public class PomodoroController implements Initializable {
 
     public void handleStart(ActionEvent event) {
         playTimer();
+        showPauseBtn();
         logger.info("Pomodoro timer started");
     }
 
     public void handlePause(ActionEvent event) {
         pauseTimer();
+        showStartBtn();
         logger.info("Pomodoro timer paused");
     }
 
@@ -133,36 +135,19 @@ public class PomodoroController implements Initializable {
         }));
 
         timeline.setOnFinished(event -> {
-            if (task.getCurrentState().getKind() == TaskStateKind.FOCUS) {
-                task.incrementPomodoroCount();
-
-                if (task.getPomodoroCount() % 4 == 0) {
-                    task.setCurrentState(new TaskState(TaskStateKind.LONG_BREAK));
-                    // setTaskStateText();
-                    prepareTimer();
-                } else {
-                    task.setCurrentState(new TaskState(TaskStateKind.SHORT_BREAK));
-                    // setTaskStateText();
-                    prepareTimer();
-                }
-            } else {
-                task.setCurrentState(new TaskState((TaskStateKind.FOCUS)));
-                // setTaskStateText();
-                prepareTimer();
-            }
+            task.setNextState();
+            prepareTimer();
         });
     }
 
     private void playTimer() {
         prepareTimer();
         timeline.play();
-        showPauseBtn();
     }
 
     private void pauseTimer() {
         if (timeline != null) {
             timeline.pause();
-            showStartBtn();
         }
     }
 
