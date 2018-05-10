@@ -1,0 +1,49 @@
+.new-task-field {
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: rgb(106,106,106);
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-border-color: rgb(106, 106, 106);
+    -fx-border-style: hidden hidden hidden solid;
+    -fx-border-width: 0 0 0 1;
+}
+
+.hbox {
+    -fx-border-color: rgb(64, 64, 64);
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(53, 53, 53);
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 14 0 14 0;
+}
+
+.list-cell .text-field {
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-background-color: transparent;
+}
+
+.list-cell .label {
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-font-size: 12px;
+}
+
+.list-cell .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(220, 220, 220);
+}
+
+.list-cell:empty {
+    -fx-border-color: #2c2c2c;
+}
+
+.list-cell.finished-task {
+
+}

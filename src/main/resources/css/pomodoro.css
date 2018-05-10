@@ -1,0 +1,39 @@
+.task-name {
+    -fx-text-fill: #767A7E;
+}
+
+.timer {
+    -fx-text-fill: #FAFAFB;
+    -fx-font-size: 68px;
+    -fx-font-family: "Titillium Web Light";
+}
+
+.button {
+    -fx-background-radius: 30px;
+    -fx-padding: 5 35 5 35;
+    -fx-font-family: "Titillium Web SemiBold";
+}
+
+.start, .pause {
+    -fx-background-color: rgb(212, 212, 212);
+}
+
+.stop {
+    -fx-border-color: rgb(86,86,86);
+    -fx-background-color: rgb(42,42,42);
+    -fx-border-radius: 30px;
+    -fx-border-width: 2;
+    -fx-text-fill: rgb(86,86,86);
+}
+
+.pause {
+    visibility: hidden;
+}
+
+.playing .start {
+    visibility: hidden;
+}
+
+.playing .pause {
+    visibility: visible;
+}

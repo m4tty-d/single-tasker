@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Titillium Web';
+    src: url('../fonts/TitilliumWeb-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Titillium Web Light';
+    src: url('../fonts/TitilliumWeb-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Titillium Web SemiBold';
+    src: url('../fonts/TitilliumWeb-SemiBold.ttf');
+}
+
+.root {
+    -fx-background-color: rgb(42,42,42);
+    -fx-font-family: "Titillium Web";
+    -fx-font-size: 14px;
+}
