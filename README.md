@@ -7,7 +7,7 @@
 Single Tasker
 ======
 
-A time managing app with the help of the pomodoro technique.
+A time management app with the help of the pomodoro technique.
 
 ## Motivation
 
@@ -29,7 +29,7 @@ $ mvn package
 
 ## Documentation
 
-The documentation can be generated with 
+The documentation can be generated with:
 
 ```bash
 $ mvn site
