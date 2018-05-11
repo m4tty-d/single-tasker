@@ -6,4 +6,31 @@
 
 Single Tasker
 ======
-This is a university project for the Programming Technologies and Programming Environments courses.
+
+A time managing app with the help of the pomodoro technique.
+
+## Motivation
+
+The project was created for the Programming Technologies and Programming Environments courses. (University of Debrecen 2017/2018)
+
+## How to run 
+
+You can run the program with the following command:
+
+```bash
+$ mvn compile exec:java
+```
+
+Or you can create the jars (normal and Uber) with:
+
+```bash
+$ mvn package
+```
+
+## Documentation
+
+The documentation can be generated with 
+
+```bash
+$ mvn site
+```

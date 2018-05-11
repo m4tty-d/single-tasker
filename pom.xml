@@ -6,7 +6,7 @@
 
     <groupId>hu.unideb.inf</groupId>
     <artifactId>single-tasker</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,18 +56,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-javafx</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-ionicons-pack</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
@@ -90,6 +78,14 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.3</version>
+                <configuration>
+                    <mainClass>${mainClass}</mainClass>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -120,8 +116,8 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[1.8,)</version>
-                                    <message>JDK 8 or later is required!</message>
+                                    <version>[1.9,)</version>
+                                    <message>JDK 9 or later is required!</message>
                                 </requireJavaVersion>
                                 <requireProperty>
                                     <property>java.vendor</property>
@@ -268,14 +264,6 @@
             </plugin>
         </plugins>
     </reporting>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>jcenter</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
 
     <scm>
         <url>https://github.com/m4tty-d/single-tasker</url>

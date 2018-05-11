@@ -96,31 +96,28 @@ public class PomodoroController implements Initializable {
     public void handleStop(ActionEvent event) {
         logger.info("Pomodoro timer stopped");
 
-        if (timeline != null && timeline.getStatus() == Animation.Status.RUNNING) {
-            // TODO Ask user whether she wants to stop the activity
-        } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pomodoroRate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pomodoroRate.fxml"));
 
-            Stage stage = new Stage();
+        Stage stage = new Stage();
 
-            try {
-                stage.setScene(new Scene(loader.load()));
-            } catch (IOException e) {
-                logger.error("Error while loading pomodoroRate.fxml, here's some further info: {}", e.getMessage());
-                return;
-            }
-
-            logger.info("PomodoroRate created");
-
-            PomodoroRateController controller = loader.getController();
-            controller.setTask(task);
-
-            root.getScene().getWindow().hide();
-            logger.info("Pomodoro hidden");
-
-            stage.show();
-            logger.info("PomodoroRate showed");
+        try {
+            stage.setScene(new Scene(loader.load()));
+        } catch (IOException e) {
+            logger.error("Error while loading pomodoroRate.fxml, here's some further info: {}", e.getMessage());
+            return;
         }
+        stage.setResizable(false);
+        logger.info("PomodoroRate created");
+
+        PomodoroRateController controller = loader.getController();
+        controller.setTask(task);
+
+        resetTimer();
+        root.getScene().getWindow().hide();
+        logger.info("Pomodoro hidden");
+
+        stage.show();
+        logger.info("PomodoroRate showed");
     }
 
     private void prepareTimer() {

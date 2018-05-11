@@ -15,12 +15,12 @@
             <Insets bottom="15.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <Label fx:id="difficultyLabel" styleClass="difficultyLabel" text="0">
+      <Label fx:id="difficultyLabel" styleClass="difficultyLabel" text="1">
          <font>
             <Font size="39.0" />
          </font>
       </Label>
-      <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" maxWidth="320.0" minorTickCount="0" prefHeight="36.0" prefWidth="320.0" snapToTicks="true">
+      <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" maxWidth="320.0" min="1.0" minorTickCount="0" prefHeight="36.0" prefWidth="320.0" snapToTicks="true">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
