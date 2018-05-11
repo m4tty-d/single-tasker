@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PomodoroRateController">
+<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.PomodoroRateController">
    <children>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="385.0" text="How hard was it to complete the task?">
          <VBox.margin>
             <Insets bottom="15.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <HBox alignment="CENTER" prefHeight="27.0" prefWidth="380.0">
-         <children>
-            <TextField fx:id="difficulty" prefHeight="27.0" prefWidth="31.0" />
-            <Label prefHeight="27.0" prefWidth="22.0" text="/10" />
-         </children>
+      <Label fx:id="difficultyLabel" styleClass="difficultyLabel" text="0">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <Slider fx:id="difficultySlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" maxWidth="320.0" minorTickCount="0" prefHeight="36.0" prefWidth="320.0" snapToTicks="true">
          <VBox.margin>
-            <Insets bottom="15.0" />
+            <Insets top="10.0" />
          </VBox.margin>
-      </HBox>
+      </Slider>
       <Button mnemonicParsing="false" onAction="#handleFinish" text="Finish">
          <VBox.margin>
-            <Insets top="80.0" />
+            <Insets top="10.0" />
          </VBox.margin>
       </Button>
    </children>
+   <stylesheets>
+      <URL value="@../css/shared.css" />
+      <URL value="@../css/pomodoro-rate.css" />
+   </stylesheets>
 </VBox>

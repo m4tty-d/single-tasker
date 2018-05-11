@@ -1,4 +1,4 @@
-package controllers;
+package singletasker.controllers;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -15,9 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import models.Task;
-import models.TaskState;
-import models.TaskStateKind;
+import singletasker.models.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +23,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the pomodoro view.
+ */
 public class PomodoroController implements Initializable {
     @FXML
     private VBox root;
@@ -33,7 +34,7 @@ public class PomodoroController implements Initializable {
     private HBox btnHolder;
 
     @FXML
-    private Label taskState;
+    private Label taskStateLabel;
 
     @FXML
     private Label taskName;
@@ -58,7 +59,7 @@ public class PomodoroController implements Initializable {
         this.task = task;
         taskName.setText(task.getName());
         setTimerText(task.getCurrentState().getRemainingSeconds());
-        // setTaskStateText();
+        setTaskStateLabelText();
         logger.info("Task set in Pomodoro");
     }
 
@@ -82,11 +83,13 @@ public class PomodoroController implements Initializable {
 
     public void handleStart(ActionEvent event) {
         playTimer();
+        showPauseBtn();
         logger.info("Pomodoro timer started");
     }
 
     public void handlePause(ActionEvent event) {
         pauseTimer();
+        showStartBtn();
         logger.info("Pomodoro timer paused");
     }
 
@@ -133,36 +136,21 @@ public class PomodoroController implements Initializable {
         }));
 
         timeline.setOnFinished(event -> {
-            if (task.getCurrentState().getKind() == TaskStateKind.FOCUS) {
-                task.incrementPomodoroCount();
-
-                if (task.getPomodoroCount() % 4 == 0) {
-                    task.setCurrentState(new TaskState(TaskStateKind.LONG_BREAK));
-                    // setTaskStateText();
-                    prepareTimer();
-                } else {
-                    task.setCurrentState(new TaskState(TaskStateKind.SHORT_BREAK));
-                    // setTaskStateText();
-                    prepareTimer();
-                }
-            } else {
-                task.setCurrentState(new TaskState((TaskStateKind.FOCUS)));
-                // setTaskStateText();
-                prepareTimer();
-            }
+            logger.info("Pomodoro timer stopped");
+            task.setNextState();
+            setTaskStateLabelText();
+            prepareTimer();
         });
     }
 
     private void playTimer() {
         prepareTimer();
         timeline.play();
-        showPauseBtn();
     }
 
     private void pauseTimer() {
         if (timeline != null) {
             timeline.pause();
-            showStartBtn();
         }
     }
 
@@ -173,10 +161,9 @@ public class PomodoroController implements Initializable {
         showStartBtn();
     }
 
-    /*
-    private void setTaskStateText() {
-        taskState.setText(task.getCurrentState().getKind().toString());
-    }*/
+    private void setTaskStateLabelText() {
+        taskStateLabel.setText(task.getCurrentState().getKind().getMotivationalText());
+    }
 
     private void showStartBtn() {
         btnHolder.getStyleClass().remove("playing");

@@ -1,3 +1,5 @@
+package singletasker;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,8 +9,14 @@ import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The main class starts the application.
+ */
 public class Main extends Application {
 
+    /**
+     * Logger instance used for logging.
+     */
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     @Override
@@ -23,6 +31,10 @@ public class Main extends Application {
         logger.info("Splash showed");
     }
 
+    /**
+     * The entry point of the application.
+     * @param args command line params
+     */
     public static void main(String[] args) {
         logger.info("Application started");
 

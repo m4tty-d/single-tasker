@@ -1,3 +1,13 @@
+.tasks-label {
+    -fx-text-fill: #767A7E;
+}
+
+.new-task-field-holder {
+    -fx-border-color: rgb(64, 64, 64);
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 1 0;
+}
+
 .new-task-field {
     -fx-background-color: transparent;
     -fx-prompt-text-fill: rgb(106,106,106);
@@ -7,14 +17,45 @@
     -fx-border-width: 0 0 0 1;
 }
 
-.hbox {
-    -fx-border-color: rgb(64, 64, 64);
-    -fx-border-style: hidden hidden solid hidden;
-    -fx-border-width: 0 0 1 0;
+.task-list-view {
+    -fx-background-color: transparent;
 }
 
-.list-view {
+.task-list-view .scroll-pane {
     -fx-background-color: transparent;
+}
+
+.task-list-view .scroll-bar {
+    -fx-background-color: black;
+}
+
+.task-list-view .scroll-bar:vertical .increment-button ,
+.task-list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+}
+
+.task-list-view .scroll-bar .increment-arrow,
+.task-list-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+.task-list-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.task-list-view .scroll-bar:vertical .track-background {
+    visibility: hidden;
+}
+
+.task-list-view .scroll-bar:vertical .track {
+    visibility: hidden;
+}
+
+.task-list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(53, 53, 53);
 }
 
 .list-cell {
@@ -44,6 +85,12 @@
     -fx-border-color: #2c2c2c;
 }
 
-.list-cell.finished-task {
+.list-cell .finished .text-field,
+.list-cell .finished .label,
+.list-cell .finished .button {
+    -fx-text-fill: rgb(75, 75, 75);
+}
 
+.gray-2 {
+    -fx-text-fill: rgb(75, 75, 75);
 }

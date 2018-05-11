@@ -1,4 +1,4 @@
-package controllers;
+package singletasker.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the splash view.
+ */
 public class SplashController implements Initializable {
 
     @FXML

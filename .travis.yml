@@ -4,6 +4,6 @@ sudo: false
 script: mvn clean install
 env:
   global:
-    - CODECOV_TOKEN=:1018ad42-ed4b-4632-ae33-e1763011d0d7
+    - CODECOV_TOKEN="1018ad42-ed4b-4632-ae33-e1763011d0d7"
 after_success:
   - bash <(curl -s https://codecov.io/bash)

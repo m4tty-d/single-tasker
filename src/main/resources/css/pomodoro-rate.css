@@ -1,0 +1,14 @@
+.label {
+    -fx-text-fill: #767A7E;
+}
+
+.difficultyLabel {
+    -fx-text-fill: #FAFAFB;
+}
+
+.button {
+    -fx-background-radius: 30px;
+    -fx-padding: 5 35 5 35;
+    -fx-font-family: "Titillium Web SemiBold";
+    -fx-background-color: rgb(212, 212, 212);
+}
