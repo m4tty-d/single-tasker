@@ -1,4 +1,4 @@
-package controllers;
+package singletasker.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

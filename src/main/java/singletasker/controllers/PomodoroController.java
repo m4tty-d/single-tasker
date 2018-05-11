@@ -1,4 +1,4 @@
-package controllers;
+package singletasker.controllers;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import models.Task;
+import singletasker.models.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -162,7 +162,7 @@ public class PomodoroController implements Initializable {
     }
 
     private void setTaskStateLabelText() {
-        taskStateLabel.setText(task.getCurrentState().getKind().getMotivationText());
+        taskStateLabel.setText(task.getCurrentState().getKind().getMotivationalText());
     }
 
     private void showStartBtn() {

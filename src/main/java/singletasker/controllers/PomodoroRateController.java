@@ -1,4 +1,4 @@
-package controllers;
+package singletasker.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,13 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
-import models.Task;
-import models.TaskState;
-import models.TaskStateKind;
-import models.User;
+import singletasker.models.Task;
+import singletasker.models.TaskStateKind;
+import singletasker.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.DifficultyLevelRangeException;
+import singletasker.utils.DifficultyLevelRangeException;
 
 import java.net.URL;
 import java.util.ResourceBundle;

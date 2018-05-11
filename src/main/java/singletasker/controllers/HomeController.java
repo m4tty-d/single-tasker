@@ -1,4 +1,4 @@
-package controllers;
+package singletasker.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,12 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import models.Task;
-import models.TaskList;
-import models.User;
+import singletasker.models.Task;
+import singletasker.models.TaskList;
+import singletasker.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.TaskCellFactory;
+import singletasker.utils.TaskCellFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 

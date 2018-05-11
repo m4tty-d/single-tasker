@@ -1,4 +1,4 @@
 /**
  * Contains the util classes.
  */
-package utils;
+package singletasker.utils;

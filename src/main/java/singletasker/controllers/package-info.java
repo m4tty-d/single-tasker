@@ -1,4 +1,4 @@
 /**
  * Contains the controller classes.
  */
-package controllers;
+package singletasker.controllers;

@@ -1,4 +1,4 @@
 /**
  * Contains the model classes.
  */
-package models;
+package singletasker.models;
