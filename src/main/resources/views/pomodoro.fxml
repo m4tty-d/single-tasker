@@ -8,20 +8,25 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PomodoroController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PomodoroController">
    <children>
-      <Label fx:id="taskName" alignment="CENTER" prefHeight="17.0" prefWidth="603.0" styleClass="task-name" text="Name of the task">
+      <Label fx:id="taskName" alignment="CENTER" prefHeight="22.0" prefWidth="380.0" styleClass="task-name" text="Name of the task">
          <VBox.margin>
             <Insets bottom="5.0" top="10.0" />
          </VBox.margin>
       </Label>
       <Label fx:id="time" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="68.0" prefWidth="380.0" styleClass="timer" text="${controller.timerText}">
          <VBox.margin>
-            <Insets top="-10.0" />
+            <Insets bottom="-10.0" top="-10.0" />
          </VBox.margin>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+      </Label>
+      <Label fx:id="taskStateLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="380.0" styleClass="task-state-label" text="State">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
       </Label>
       <HBox fx:id="btnHolder" alignment="CENTER">
          <children>

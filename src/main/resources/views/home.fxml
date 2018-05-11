@@ -39,7 +39,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label contentDisplay="CENTER" prefHeight="22.0" styleClass="gray-2" text="0 points" HBox.hgrow="NEVER">
+                        <Label fx:id="pointsLabel" contentDisplay="CENTER" prefHeight="22.0" styleClass="gray-2" text="0 points" HBox.hgrow="NEVER">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -48,7 +48,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" styleClass="gray-2" text="0 completed tasks" HBox.hgrow="ALWAYS">
+                        <Label fx:id="completedTasksLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" styleClass="gray-2" text="0 completed tasks" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -57,7 +57,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="40.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="22.0" styleClass="gray-2" text="Rookie" HBox.hgrow="ALWAYS">
+                        <Label fx:id="rankLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="22.0" styleClass="gray-2" text="Rookie" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="11.0" />
                            </font>

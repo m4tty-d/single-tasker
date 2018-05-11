@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is used to handle the storage of the tasks.
+ * Represents the task list.
  */
 public class TaskList {
 

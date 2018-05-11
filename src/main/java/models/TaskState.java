@@ -1,5 +1,7 @@
 package models;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +12,7 @@ public class TaskState {
     /**
      * The type of the state.
      */
-    private TaskStateKind kind;
+    private ObjectProperty<TaskStateKind> kind = new SimpleObjectProperty<>();
 
     /**
      * The remaining seconds.
@@ -27,8 +29,7 @@ public class TaskState {
      * @param kind the type of the state
      */
     public TaskState(TaskStateKind kind) {
-        this.kind = kind;
-        this.remainingSeconds = kind.getDurationInSeconds();
+        setKind(kind);
         logger.info("TaskState object created");
     }
 
@@ -52,9 +53,8 @@ public class TaskState {
      * @param kind the type of the task's state
      */
     public void setKind(TaskStateKind kind) {
-        this.kind = kind;
-        this.remainingSeconds = kind.getDurationInSeconds();
-        logger.info("TaskState kind is set to:  " + kind.getClass().getName());
+        this.kind.set(kind);
+        this.remainingSeconds = getKind().getDurationInSeconds();
     }
 
     /**
@@ -62,6 +62,10 @@ public class TaskState {
      * @return the state of the task
      */
     public TaskStateKind getKind() {
+        return kind.get();
+    }
+
+    public ObjectProperty<TaskStateKind> kindProperty() {
         return kind;
     }
 }

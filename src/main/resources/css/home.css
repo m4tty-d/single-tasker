@@ -85,6 +85,12 @@
     -fx-border-color: #2c2c2c;
 }
 
+.list-cell .finished .text-field,
+.list-cell .finished .label,
+.list-cell .finished .button {
+    -fx-text-fill: rgb(75, 75, 75);
+}
+
 .gray-2 {
     -fx-text-fill: rgb(75, 75, 75);
 }

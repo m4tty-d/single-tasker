@@ -1,10 +1,11 @@
 package models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.DifficultyLevelRangeException;
+
+import java.util.Objects;
 
 /**
  * Represents a task.
@@ -91,7 +92,7 @@ public class Task {
      */
     public void setDifficultyLevel(int difficultyLevel) throws DifficultyLevelRangeException {
         if (difficultyLevel < 0 || difficultyLevel > 10) {
-            throw new DifficultyLevelRangeException("Difficulty must be between 0 and 10!");
+            throw new DifficultyLevelRangeException("Difficulty must be between 0 and 10");
         } else {
             this.difficultyLevel = difficultyLevel;
         }
@@ -150,17 +151,33 @@ public class Task {
      * if the pomodoro count exceeds 4 the user gets a long break, otherwise a short break.
      */
     public void setNextState() {
-        if (this.getCurrentState().getKind() == TaskStateKind.FOCUS) {
-            this.incrementPomodoroCount();
+        if (currentState.getKind() == TaskStateKind.FOCUS) {
+            incrementPomodoroCount();
 
-            if (this.getPomodoroCount() % 4 == 0) {
-                this.setCurrentState(new TaskState(TaskStateKind.LONG_BREAK));
+            if (getPomodoroCount() % 4 == 0) {
+                currentState.setKind(TaskStateKind.LONG_BREAK);
             } else {
-                this.setCurrentState(new TaskState(TaskStateKind.SHORT_BREAK));
+                currentState.setKind(TaskStateKind.SHORT_BREAK);
             }
         } else {
-            this.setCurrentState(new TaskState((TaskStateKind.FOCUS)));
+            currentState.setKind(TaskStateKind.FOCUS);
         }
+    }
+
+    /**
+     * Gets the point after the completion of the task.
+     * The point is calculated from the difficulty level and the count of the pomodoros, with the following formula:
+     * difficultyLevel / pomodoroCount * pointByDifficulty
+     * where pointByDifficulty is difficultyLevel*10
+     * @return the points
+     */
+    public int getPoints() {
+        if (currentState.getKind() == TaskStateKind.FINISHED && getPomodoroCount() != 0) {
+            int pointByDifficulty = difficultyLevel*10;
+            return Math.round(difficultyLevel/getPomodoroCount()*pointByDifficulty);
+        }
+
+        return 0;
     }
 
     /**
@@ -175,5 +192,21 @@ public class Task {
                 ", pomodoroCount=" + pomodoroCount +
                 ", currentState=" + currentState +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return difficultyLevel == task.difficultyLevel &&
+                Objects.equals(name, task.name) &&
+                Objects.equals(pomodoroCount, task.pomodoroCount) &&
+                Objects.equals(currentState, task.currentState);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, difficultyLevel, pomodoroCount, currentState);
     }
 }

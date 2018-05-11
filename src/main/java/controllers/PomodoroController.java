@@ -16,8 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.Task;
-import models.TaskState;
-import models.TaskStateKind;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +23,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the pomodoro view.
+ */
 public class PomodoroController implements Initializable {
     @FXML
     private VBox root;
@@ -33,7 +34,7 @@ public class PomodoroController implements Initializable {
     private HBox btnHolder;
 
     @FXML
-    private Label taskState;
+    private Label taskStateLabel;
 
     @FXML
     private Label taskName;
@@ -58,7 +59,7 @@ public class PomodoroController implements Initializable {
         this.task = task;
         taskName.setText(task.getName());
         setTimerText(task.getCurrentState().getRemainingSeconds());
-        // setTaskStateText();
+        setTaskStateLabelText();
         logger.info("Task set in Pomodoro");
     }
 
@@ -135,7 +136,9 @@ public class PomodoroController implements Initializable {
         }));
 
         timeline.setOnFinished(event -> {
+            logger.info("Pomodoro timer stopped");
             task.setNextState();
+            setTaskStateLabelText();
             prepareTimer();
         });
     }
@@ -158,10 +161,9 @@ public class PomodoroController implements Initializable {
         showStartBtn();
     }
 
-    /*
-    private void setTaskStateText() {
-        taskState.setText(task.getCurrentState().getKind().toString());
-    }*/
+    private void setTaskStateLabelText() {
+        taskStateLabel.setText(task.getCurrentState().getKind().getMotivationText());
+    }
 
     private void showStartBtn() {
         btnHolder.getStyleClass().remove("playing");
