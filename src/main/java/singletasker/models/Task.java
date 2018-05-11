@@ -11,7 +11,6 @@ import java.util.Objects;
  * Represents a task.
  */
 public class Task {
-
     /**
      * Name of the task.
      */
@@ -115,7 +114,6 @@ public class Task {
     public IntegerProperty pomodoroCountProperty() {
         return pomodoroCount;
     }
-
 
     private void setPomodoroCount(int pomodoroCount) {
         this.pomodoroCount.set(pomodoroCount);

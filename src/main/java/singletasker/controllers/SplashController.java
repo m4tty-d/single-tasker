@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,7 @@ public class SplashController implements Initializable {
     @FXML
     private StackPane rootPane;
 
-    private static int SHOWTIME = 700;
+    private static int SHOWTIME = 1200;
 
     private static Logger logger = LoggerFactory.getLogger(SplashController.class);
 

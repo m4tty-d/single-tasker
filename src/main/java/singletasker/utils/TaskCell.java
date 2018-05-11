@@ -121,7 +121,7 @@ class TaskCell extends ListCell<Task> {
         } catch (IOException e) {
             logger.error("Error while loading pomodoro.fxml, here's some further info: {}", e.getMessage());
         }
-
+        stage.setResizable(false);
         logger.info("Pomodoro created");
 
         PomodoroController controller = loader.getController();
