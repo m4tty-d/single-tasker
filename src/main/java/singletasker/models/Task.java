@@ -1,9 +1,9 @@
-package models;
+package singletasker.models;
 
 import javafx.beans.property.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.DifficultyLevelRangeException;
+import singletasker.utils.DifficultyLevelRangeException;
 
 import java.util.Objects;
 
@@ -91,8 +91,8 @@ public class Task {
      * @throws DifficultyLevelRangeException if difficultyLevel is not in the correct range
      */
     public void setDifficultyLevel(int difficultyLevel) throws DifficultyLevelRangeException {
-        if (difficultyLevel < 0 || difficultyLevel > 10) {
-            throw new DifficultyLevelRangeException("Difficulty must be between 0 and 10");
+        if (difficultyLevel < 1 || difficultyLevel > 10) {
+            throw new DifficultyLevelRangeException("Difficulty must be between 1 and 10");
         } else {
             this.difficultyLevel = difficultyLevel;
         }
@@ -138,12 +138,12 @@ public class Task {
     }
 
     /**
-     * Sets the current state of the task.
-     * @param currentState the current state
+     * Sets the current state's kind.
+     * @param currentStateKind
      */
-    public void setCurrentState(TaskState currentState) {
-        this.currentState = currentState;
-        logger.info("Task's current state set");
+    public void setCurrentStateKind(TaskStateKind currentStateKind) {
+        currentState.setKind(currentStateKind);
+        logger.info("Task's state set to " + currentStateKind);
     }
 
     /**

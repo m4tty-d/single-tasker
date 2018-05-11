@@ -1,9 +1,9 @@
-package utils;
+package singletasker.utils;
 
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
-import models.Task;
+import singletasker.models.Task;
 
 public class TaskCellFactory implements Callback<ListView<Task>,ListCell<Task>> {
 

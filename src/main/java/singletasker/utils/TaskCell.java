@@ -1,6 +1,6 @@
-package utils;
+package singletasker.utils;
 
-import controllers.PomodoroController;
+import singletasker.controllers.PomodoroController;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -11,8 +11,8 @@ import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-import models.Task;
-import models.TaskStateKind;
+import singletasker.models.Task;
+import singletasker.models.TaskStateKind;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

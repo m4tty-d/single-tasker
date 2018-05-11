@@ -1,3 +1,5 @@
+package singletasker;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,6 +31,10 @@ public class Main extends Application {
         logger.info("Splash showed");
     }
 
+    /**
+     * The entry point of the application.
+     * @param args command line params
+     */
     public static void main(String[] args) {
         logger.info("Application started");
 

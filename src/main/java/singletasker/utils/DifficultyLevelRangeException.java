@@ -1,4 +1,4 @@
-package utils;
+package singletasker.utils;
 
 public class DifficultyLevelRangeException extends Exception {
 

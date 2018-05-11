@@ -1,4 +1,4 @@
-package models;
+package singletasker.models;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,7 +25,14 @@ public class TaskState {
     private Logger logger = LoggerFactory.getLogger(TaskState.class);
 
     /**
-     * Contructor which sets the default values.
+     * Default contructor, which sets the default state.
+     */
+    public TaskState() {
+        setKind(TaskStateKind.FOCUS);
+    }
+
+    /**
+     * Contructor which sets the kind of the task state.
      * @param kind the type of the state
      */
     public TaskState(TaskStateKind kind) {
@@ -65,6 +72,10 @@ public class TaskState {
         return kind.get();
     }
 
+    /**
+     * Gets the reactive task state property.
+     * @return the state property
+     */
     public ObjectProperty<TaskStateKind> kindProperty() {
         return kind;
     }

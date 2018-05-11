@@ -1,4 +1,4 @@
-package models;
+package singletasker.models;
 
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
@@ -9,7 +9,9 @@ import javafx.beans.property.StringProperty;
  * Represents the user.
  */
 public class User {
-
+    /**
+     * The user instance.
+     */
     private static User instance;
 
     /**
@@ -44,6 +46,10 @@ public class User {
         return instance;
     }
 
+    /**
+     * Gets the total points property.
+     * @return the total points property
+     */
     public LongProperty totalPointsProperty() {
         return totalPoints;
     }
@@ -54,7 +60,7 @@ public class User {
 
     /**
      * Adds to the total points.
-     * @param points
+     * @param points the points to add
      */
     public void addToTotalPoints(int points) {
         long totalPoints = getTotalPoints();
@@ -70,6 +76,10 @@ public class User {
         return totalPoints.get();
     }
 
+    /**
+     * Gets the completed tasks property.
+     * @return the completed tasks property
+     */
     public LongProperty completedTasksProperty() {
         return completedTasks;
     }
@@ -93,6 +103,10 @@ public class User {
         return completedTasks.get();
     }
 
+    /**
+     * Gets the user rank property.
+     * @return the user rank property
+     */
     public StringProperty userRankProperty() {
         return userRank;
     }

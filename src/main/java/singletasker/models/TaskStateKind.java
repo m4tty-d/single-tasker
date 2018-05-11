@@ -1,4 +1,4 @@
-package models;
+package singletasker.models;
 
 /**
  * Represents the different task states.
@@ -32,16 +32,16 @@ public enum TaskStateKind {
     /**
      * Motivational text for the state.
      */
-    private String motivationText;
+    private String motivationalText;
 
     /**
      * Constructor which sets the duration and motivational text.
      * @param durationInSeconds duration of the state
-     * @param motivationText motivational text for the state
+     * @param motivationalText motivational text for the state
      */
-    TaskStateKind(int durationInSeconds, String motivationText) {
+    TaskStateKind(int durationInSeconds, String motivationalText) {
         this.durationInSeconds = durationInSeconds;
-        this.motivationText = motivationText;
+        this.motivationalText = motivationalText;
     }
 
     /**
@@ -56,7 +56,7 @@ public enum TaskStateKind {
      * Gets the motivational text for the state.
      * @return motivational text
      */
-    public String getMotivationText() {
-        return motivationText;
+    public String getMotivationalText() {
+        return motivationalText;
     }
 }

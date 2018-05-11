@@ -1,4 +1,4 @@
-package models;
+package singletasker.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,6 +60,14 @@ public class TaskList {
     public void removeTask(Task t) {
         tasks.remove(t);
         logger.info("Task removed from list named: " + t.getName());
+    }
+
+    /**
+     * Gets the size of the task list.
+     * @return the size of the task list
+     */
+    public int size() {
+        return tasks.size();
     }
 
     /**
