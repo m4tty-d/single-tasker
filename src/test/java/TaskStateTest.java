@@ -15,30 +15,30 @@ public class TaskStateTest {
 
     @Test
     public void testGetRemainingSeconds() {
-        Assertions.assertEquals(taskState.getRemainingSeconds(), TaskStateKind.FOCUS.getDurationInSeconds());
+        Assertions.assertEquals(TaskStateKind.FOCUS.getDurationInSeconds(), taskState.getRemainingSeconds());
 
         taskState.setKind(TaskStateKind.SHORT_BREAK);
-        Assertions.assertEquals(taskState.getRemainingSeconds(), TaskStateKind.SHORT_BREAK.getDurationInSeconds());
+        Assertions.assertEquals(TaskStateKind.SHORT_BREAK.getDurationInSeconds(), taskState.getRemainingSeconds());
 
         taskState.setKind(TaskStateKind.LONG_BREAK);
-        Assertions.assertEquals(taskState.getRemainingSeconds(), TaskStateKind.LONG_BREAK.getDurationInSeconds());
+        Assertions.assertEquals(TaskStateKind.LONG_BREAK.getDurationInSeconds(), taskState.getRemainingSeconds());
 
         taskState.setKind(TaskStateKind.FINISHED);
-        Assertions.assertEquals(taskState.getRemainingSeconds(), TaskStateKind.FINISHED.getDurationInSeconds());
+        Assertions.assertEquals(TaskStateKind.FINISHED.getDurationInSeconds(), taskState.getRemainingSeconds());
     }
 
     @Test
     public void testTickRemainingSeconds() {
         taskState.tickRemainingSeconds();
-        Assertions.assertEquals(taskState.getRemainingSeconds(), TaskStateKind.FOCUS.getDurationInSeconds() - 1);
+        Assertions.assertEquals(TaskStateKind.FOCUS.getDurationInSeconds() - 1, taskState.getRemainingSeconds());
 
         taskState.tickRemainingSeconds();
-        Assertions.assertEquals(taskState.getRemainingSeconds(), TaskStateKind.FOCUS.getDurationInSeconds() - 2);
+        Assertions.assertEquals(TaskStateKind.FOCUS.getDurationInSeconds() - 2, taskState.getRemainingSeconds());
     }
 
     @Test
     public void testSetKind() {
         taskState.setKind(TaskStateKind.FINISHED);
-        Assertions.assertEquals(taskState.getKind(), TaskStateKind.FINISHED);
+        Assertions.assertEquals(TaskStateKind.FINISHED, taskState.getKind());
     }
 }

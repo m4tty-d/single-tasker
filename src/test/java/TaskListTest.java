@@ -22,10 +22,10 @@ public class TaskListTest {
     @Test
     public void testAddTask() {
         taskList.addTask(new Task("test"));
-        Assertions.assertEquals(taskList.size(), 1);
+        Assertions.assertEquals(1, taskList.size());
 
         taskList.addTask(new Task("another"));
-        Assertions.assertEquals(taskList.size(), 2);
+        Assertions.assertEquals(2, taskList.size());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class TaskListTest {
         Task t = new Task("first");
         taskList.addTask(t);
         taskList.removeTask(t);
-        Assertions.assertEquals(taskList.size(), 0);
+        Assertions.assertEquals(0, taskList.size());
     }
 
     @Test
@@ -49,6 +49,6 @@ public class TaskListTest {
         taskList.addTask(first);
         taskList.addTask(second);
 
-        Assertions.assertEquals(taskList1.size(), taskList.getTasks().size());
+        Assertions.assertEquals(taskList.getTasks().size(), taskList1.size());
     }
 }

@@ -21,35 +21,35 @@ public class UserTest {
     @Test
     public void testAddToTotalPoints() {
         user.addToTotalPoints(100);
-        Assertions.assertEquals(user.getTotalPoints(), 100);
+        Assertions.assertEquals(100, user.getTotalPoints());
 
         user.addToTotalPoints(100);
-        Assertions.assertEquals(user.getTotalPoints(), 200);
+        Assertions.assertEquals(200, user.getTotalPoints());
     }
 
     @Test
     public void testIncrementCompletedTasks() {
         user.incrementCompletedTasks();
-        Assertions.assertEquals(user.getCompletedTasks(), 1);
+        Assertions.assertEquals(1, user.getCompletedTasks());
 
         user.incrementCompletedTasks();
-        Assertions.assertEquals(user.getCompletedTasks(), 2);
+        Assertions.assertEquals(2, user.getCompletedTasks());
     }
 
     @Test
     public void testSetUserRankByPoint() {
-        Assertions.assertEquals(user.getUserRank(), UserRankKind.ROOKIE.getDisplayName());
+        Assertions.assertEquals(UserRankKind.ROOKIE.getDisplayName(), user.getUserRank());
 
         user.addToTotalPoints(1001);
-        Assertions.assertEquals(user.getUserRank(), UserRankKind.LEVEL_2.getDisplayName());
+        Assertions.assertEquals(UserRankKind.LEVEL_2.getDisplayName(), user.getUserRank());
 
         user.addToTotalPoints(1000);
-        Assertions.assertEquals(user.getUserRank(), UserRankKind.LEVEL_3.getDisplayName());
+        Assertions.assertEquals(UserRankKind.LEVEL_3.getDisplayName(), user.getUserRank());
 
         user.addToTotalPoints(3000);
-        Assertions.assertEquals(user.getUserRank(), UserRankKind.LEVEL_4.getDisplayName());
+        Assertions.assertEquals(UserRankKind.LEVEL_4.getDisplayName(), user.getUserRank());
 
         user.addToTotalPoints(5000);
-        Assertions.assertEquals(user.getUserRank(), UserRankKind.PRODUCTIVITY_NINJA.getDisplayName());
+        Assertions.assertEquals(UserRankKind.PRODUCTIVITY_NINJA.getDisplayName(), user.getUserRank());
     }
 }

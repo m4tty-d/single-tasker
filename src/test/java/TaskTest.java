@@ -18,25 +18,25 @@ class TaskTest {
     @Test
     public void testSetName() {
         task.setName("test");
-        Assertions.assertEquals(task.getName(), "test");
+        Assertions.assertEquals("test", task.getName());
 
         task.setName("");
-        Assertions.assertEquals(task.getName(), "");
+        Assertions.assertEquals("", task.getName());
     }
 
     @Test
     public void testSetCurrentStateKind() {
         task.setCurrentStateKind(TaskStateKind.FOCUS);
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.FOCUS);
+        Assertions.assertEquals(TaskStateKind.FOCUS, task.getCurrentState().getKind());
 
         task.setCurrentStateKind(TaskStateKind.SHORT_BREAK);
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.SHORT_BREAK);
+        Assertions.assertEquals(TaskStateKind.SHORT_BREAK, task.getCurrentState().getKind());
 
         task.setCurrentStateKind(TaskStateKind.LONG_BREAK);
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.LONG_BREAK);
+        Assertions.assertEquals(TaskStateKind.LONG_BREAK, task.getCurrentState().getKind());
 
         task.setCurrentStateKind(TaskStateKind.FINISHED);
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.FINISHED);
+        Assertions.assertEquals(TaskStateKind.FINISHED, task.getCurrentState().getKind());
     }
 
     @Test
@@ -50,42 +50,42 @@ class TaskTest {
             task.setDifficultyLevel(1);
         } catch (DifficultyLevelRangeException e) {}
 
-        Assertions.assertEquals(task.getDifficultyLevel(), 1);
+        Assertions.assertEquals(1, task.getDifficultyLevel());
     }
 
     @Test
     public void testIncrementPomodoroCount() {
         task.incrementPomodoroCount();
-        Assertions.assertEquals(task.getPomodoroCount(), 1);
+        Assertions.assertEquals(1, task.getPomodoroCount());
 
         task.incrementPomodoroCount();
-        Assertions.assertEquals(task.getPomodoroCount(), 2);
+        Assertions.assertEquals(2, task.getPomodoroCount());
     }
 
     @Test
     public void testSetNextState() {
         task.setNextState();
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.SHORT_BREAK);
+        Assertions.assertEquals(TaskStateKind.SHORT_BREAK, task.getCurrentState().getKind());
 
         task.setNextState();
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.FOCUS);
+        Assertions.assertEquals(TaskStateKind.FOCUS, task.getCurrentState().getKind());
 
         task.incrementPomodoroCount();
         task.incrementPomodoroCount();
         task.setNextState();
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.LONG_BREAK);
+        Assertions.assertEquals(TaskStateKind.LONG_BREAK, task.getCurrentState().getKind());
 
         task.setNextState();
-        Assertions.assertEquals(task.getCurrentState().getKind(), TaskStateKind.FOCUS);
+        Assertions.assertEquals(TaskStateKind.FOCUS, task.getCurrentState().getKind());
     }
 
     @Test
     public void testGetPoints() {
-        Assertions.assertEquals(task.getPoints(), 0);
+        Assertions.assertEquals(0, task.getPoints());
 
         task.setCurrentStateKind(TaskStateKind.FINISHED);
 
-        Assertions.assertEquals(task.getPoints(), 0);
+        Assertions.assertEquals(0, task.getPoints());
 
         task.incrementPomodoroCount();
 
@@ -95,6 +95,6 @@ class TaskTest {
             e.printStackTrace();
         }
 
-        Assertions.assertEquals(task.getPoints(), 10);
+        Assertions.assertEquals(10, task.getPoints());
     }
 }

@@ -9,15 +9,15 @@ public class TaskStateKindTest {
     @Test
     public void testGetMotivationalText() {
         taskStateKind = TaskStateKind.FOCUS;
-        Assertions.assertEquals(taskStateKind.getMotivationalText(), TaskStateKind.FOCUS.getMotivationalText());
+        Assertions.assertEquals(TaskStateKind.FOCUS.getMotivationalText(), taskStateKind.getMotivationalText());
 
         taskStateKind = TaskStateKind.SHORT_BREAK;
-        Assertions.assertEquals(taskStateKind.getMotivationalText(), TaskStateKind.SHORT_BREAK.getMotivationalText());
+        Assertions.assertEquals(TaskStateKind.SHORT_BREAK.getMotivationalText(), taskStateKind.getMotivationalText());
 
         taskStateKind = TaskStateKind.LONG_BREAK;
-        Assertions.assertEquals(taskStateKind.getMotivationalText(), TaskStateKind.LONG_BREAK.getMotivationalText());
+        Assertions.assertEquals(TaskStateKind.LONG_BREAK.getMotivationalText(), taskStateKind.getMotivationalText());
 
         taskStateKind = TaskStateKind.FINISHED;
-        Assertions.assertEquals(taskStateKind.getMotivationalText(), TaskStateKind.FINISHED.getMotivationalText());
+        Assertions.assertEquals(TaskStateKind.FINISHED.getMotivationalText(), taskStateKind.getMotivationalText());
     }
 }
