@@ -1,6 +1,4 @@
-import clover.org.apache.commons.lang3.builder.Diff;
 import singletasker.models.Task;
-import singletasker.models.TaskState;
 import singletasker.models.TaskStateKind;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -81,11 +79,11 @@ class TaskTest {
 
     @Test
     public void testGetPoints() {
-        Assertions.assertEquals(0, task.getPoints());
+        Assertions.assertEquals(0, task.getRewardPoints());
 
         task.setCurrentStateKind(TaskStateKind.FINISHED);
 
-        Assertions.assertEquals(0, task.getPoints());
+        Assertions.assertEquals(0, task.getRewardPoints());
 
         task.incrementPomodoroCount();
 
@@ -95,6 +93,6 @@ class TaskTest {
             e.printStackTrace();
         }
 
-        Assertions.assertEquals(10, task.getPoints());
+        Assertions.assertEquals(10, task.getRewardPoints());
     }
 }

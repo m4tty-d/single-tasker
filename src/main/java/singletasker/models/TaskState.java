@@ -5,23 +5,30 @@ import javafx.beans.property.SimpleObjectProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
+
 /**
  * Represents a task state.
  */
+@Embeddable
+@Access(AccessType.FIELD)
 public class TaskState {
     /**
      * The type of the state.
      */
+    @Transient
     private ObjectProperty<TaskStateKind> kind = new SimpleObjectProperty<>();
 
     /**
      * The remaining seconds.
      */
+    @Transient
     private int remainingSeconds;
 
     /**
      * Logger instance for logging.
      */
+    @Transient
     private Logger logger = LoggerFactory.getLogger(TaskState.class);
 
     /**
@@ -68,6 +75,8 @@ public class TaskState {
      * Gets the type of the task's state.
      * @return the state of the task
      */
+    @Access(AccessType.PROPERTY)
+    @Enumerated(EnumType.ORDINAL)
     public TaskStateKind getKind() {
         return kind.get();
     }

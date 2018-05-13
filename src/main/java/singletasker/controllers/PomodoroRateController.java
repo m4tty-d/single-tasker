@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
+import singletasker.dao.UserDAOImpl;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
 import singletasker.models.User;
@@ -32,8 +33,6 @@ public class PomodoroRateController implements Initializable {
 
     private Task task;
 
-    private User user = User.getInstance();
-
     private Logger logger = LoggerFactory.getLogger(PomodoroController.class);
 
     @Override
@@ -55,8 +54,10 @@ public class PomodoroRateController implements Initializable {
             logger.error(e.getMessage());
         }
         task.getCurrentState().setKind(TaskStateKind.FINISHED);
-        user.addToTotalPoints(task.getPoints());
-        user.incrementCompletedTasks();
+        // User user = new User();
+        // user.addToTotalPoints(task.getRewardPoints());
+        // user.incrementCompletedTasks();
+        // userController.update(user);
 
         root.getScene().getWindow().hide();
         logger.info("Pomodoro rating finished");

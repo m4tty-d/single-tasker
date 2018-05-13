@@ -5,45 +5,42 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.persistence.*;
+
 /**
  * Represents the user.
  */
+@Entity
 public class User {
-    /**
-     * The user instance.
-     */
-    private static User instance;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     /**
      * Total points of the user.
      */
+    @Transient
     private LongProperty totalPoints = new SimpleLongProperty(0);
 
     /**
      * Completed tasks.
      */
+    @Transient
     private LongProperty completedTasks = new SimpleLongProperty(0);
 
     /**
      * The rank of the user.
      */
+    @Transient
     private StringProperty userRank = new SimpleStringProperty(UserRankKind.ROOKIE.getDisplayName());
 
-    /**
-     * Contructor disabled. (singleton)
-     */
-    private User() {}
+    @Transient
+    private User instance;
 
-    /**
-     * Creates the User instance or returns it if it's already created.
-     * @return the user instance
-     */
-    public static User getInstance() {
-        if (instance == null) {
-            instance = new User();
-        }
+    public User() {}
 
-        return instance;
+    public Long getId() {
+        return id;
     }
 
     /**
@@ -72,6 +69,7 @@ public class User {
      * Gets the total points.
      * @return the total points
      */
+    @Access(AccessType.PROPERTY)
     public long getTotalPoints() {
         return totalPoints.get();
     }
@@ -99,6 +97,7 @@ public class User {
      * Gets the completed tasks.
      * @return the completed tasks
      */
+    @Access(AccessType.PROPERTY)
     public long getCompletedTasks() {
         return completedTasks.get();
     }
@@ -138,6 +137,7 @@ public class User {
      * Gets the user's rank.
      * @return rank of the user
      */
+    @Access(AccessType.PROPERTY)
     public String getUserRank() {
         return userRank.get();
     }

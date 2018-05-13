@@ -1,7 +1,6 @@
 package singletasker.utils;
 
 import singletasker.controllers.PomodoroController;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +10,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import singletasker.controllers.TaskListController;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
 import org.slf4j.Logger;
@@ -22,24 +22,22 @@ class TaskCell extends ListCell<Task> {
 
     private final HBox hBox = new HBox();
     private final TextField textField = new TextField();
-    private final Button editBtn = new Button(">");
+    private final Button editBtn = new Button("▷");
+    private final Button removeBtn = new Button("✕");
     private final Label taskStateSymbol = new Label("●");
     private final Label pomodoroSymbol = new Label("●");
     private final Label pomodoroCountLabel = new Label("0");
     private static Stage pomodoroStage;
-    private static ContextMenu contextMenu = new ContextMenu();
+
+    private TaskListController taskListController = TaskListController.getInstance();
 
     private Logger logger = LoggerFactory.getLogger(TaskCell.class);
 
     public TaskCell() {
         setBindings();
-
         setHbox();
-
-        setContextMenu();
-
         handleEditBtnClick();
-
+        handleRemoveBtnClick();
         handleTextFieldEvents();
     }
 
@@ -55,6 +53,7 @@ class TaskCell extends ListCell<Task> {
     public void cancelEdit() {
         super.cancelEdit();
         getHBoxsTextField().setText(getItem().getName());
+        hBox.requestFocus();
     }
 
     @Override
@@ -72,27 +71,28 @@ class TaskCell extends ListCell<Task> {
     }
 
     private void setHbox() {
-        hBox.getChildren().addAll(taskStateSymbol, textField, pomodoroSymbol, pomodoroCountLabel, editBtn);
+        editBtn.getStyleClass().add("editBtn");
+        removeBtn.getStyleClass().add("removeBtn");
+        hBox.getChildren().addAll(taskStateSymbol, textField, pomodoroSymbol, pomodoroCountLabel, editBtn, removeBtn);
         hBox.setAlignment(Pos.CENTER_LEFT);
         HBox.setHgrow(textField, Priority.ALWAYS);
         HBox.setMargin(pomodoroSymbol, new Insets(2, 5, 0, 0));
         HBox.setMargin(pomodoroCountLabel, new Insets(0, 10, 0, 0));
-    }
-
-    private void setContextMenu() {
-        MenuItem deleteItem = new MenuItem();
-        deleteItem.textProperty().bind(Bindings.format("Delete \"%s\"", this.itemProperty()));
-        deleteItem.setOnAction(event -> System.out.println("adsf"));
-        contextMenu.getItems().addAll(deleteItem);
+        HBox.setMargin(editBtn, new Insets(2, 0, 0, 0));
+        HBox.setMargin(removeBtn, new Insets(2, 0, 0, 0));
     }
 
     private void handleTextFieldEvents() {
-        textField.addEventFilter(KeyEvent.KEY_RELEASED, e -> {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 cancelEdit();
-            } else if (notSpecialKey(e)) {
-                getItem().setName(getHBoxsTextField().getText());
             }
+        });
+
+        textField.setOnAction(event -> {
+            getItem().setName(getHBoxsTextField().getText());
+            taskListController.updateTask(getItem());
+            hBox.requestFocus();
         });
     }
 
@@ -104,6 +104,13 @@ class TaskCell extends ListCell<Task> {
             pomodoroStage = buildPomodoro(getItem());
             pomodoroStage.show();
             logger.info("Pomodoro showed");
+        });
+    }
+
+    private void handleRemoveBtnClick() {
+        removeBtn.setOnAction(event -> {
+            taskListController.removeTask(getItem());
+            logger.info("Task removed");
         });
     }
 
@@ -143,15 +150,5 @@ class TaskCell extends ListCell<Task> {
                 });
             }
         });
-    }
-
-    private boolean notSpecialKey(KeyEvent e) {
-        return  e.getCode() != KeyCode.RIGHT ||
-                e.getCode() != KeyCode.LEFT ||
-                e.getCode() != KeyCode.UP ||
-                e.getCode() != KeyCode.DOWN ||
-                e.isAltDown() ||
-                e.isShiftDown() ||
-                e.isControlDown();
     }
 }

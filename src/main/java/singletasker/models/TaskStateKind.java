@@ -7,17 +7,17 @@ public enum TaskStateKind {
     /**
      * Represents the focus state, which is when the user is working.
      */
-    FOCUS(25*60, "It's time to focus!"),
+    FOCUS(6, "It's time to focus!"),
 
     /**
      * Represents a short break, which is the default break after focus state.
      */
-    SHORT_BREAK(5*60, "Stand up, take a short break."),
+    SHORT_BREAK(3, "Stand up, take a short break."),
 
     /**
      * Represents a long break, which is set after 4 work sessions.
      */
-    LONG_BREAK(15*60, "Take a longer break, you deserve it! :)"),
+    LONG_BREAK(5, "Take a longer break, you deserve it! :)"),
 
     /**
      * Represents the finished state.

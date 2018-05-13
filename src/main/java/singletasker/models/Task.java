@@ -1,16 +1,24 @@
 package singletasker.models;
 
-import javafx.beans.property.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import singletasker.utils.DifficultyLevelRangeException;
-
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Represents a task.
  */
+@Entity
+@Table(name="TASKS")
 public class Task {
+    /**
+     * Id of the task.
+     */
+    @Id
+    @GeneratedValue
+    private Long id;
+
     /**
      * Name of the task.
      */
@@ -19,22 +27,20 @@ public class Task {
     /**
      * Difficulty level of the task. (1-10)
      */
+    @Transient
     private int difficultyLevel;
 
     /**
      * The count of the pomodoros. A pomodoro is basically a work session.
      */
+    @Transient
     private IntegerProperty pomodoroCount;
 
     /**
      * The current state of the task.
      */
+    @Embedded
     private TaskState currentState;
-
-    /**
-     * Logger instance used for logging.
-     */
-    private Logger logger = LoggerFactory.getLogger(Task.class);
 
     /**
      * Contructor which sets the default values.
@@ -46,13 +52,20 @@ public class Task {
     }
 
     /**
-     * Default contructor.
+     * Contructor which sets the name, and the default values.
      * @param name the name of the task
      */
     public Task(String name) {
         this();
         this.name = name;
-        logger.info("Task object created");
+    }
+
+    /**
+     * Gets the task's id.
+     * @return the id of the task
+     */
+    public Long getId() {
+        return id;
     }
 
     /**
@@ -69,7 +82,6 @@ public class Task {
      */
     public void setName(String name) {
         this.name = name;
-        logger.info("Task's name set with: " + name);
     }
 
     /**
@@ -95,36 +107,29 @@ public class Task {
         } else {
             this.difficultyLevel = difficultyLevel;
         }
-        logger.info("Task's difficulty level set: " + difficultyLevel);
     }
+
 
     /**
      * Gets the task's pomodoro count.
      * A pomodoro is a work session.
      * @return the pomodoro count
      */
+    @Access(AccessType.PROPERTY)
     public int getPomodoroCount() {
         return pomodoroCount.get();
     }
 
-    /**
-     * Gets the PomodoroCount's reactive property.
-     * @return the pomodoroCount property
-     */
     public IntegerProperty pomodoroCountProperty() {
         return pomodoroCount;
     }
 
-    private void setPomodoroCount(int pomodoroCount) {
+    public void setPomodoroCount(int pomodoroCount) {
         this.pomodoroCount.set(pomodoroCount);
-        logger.info("Task's pomodoro count set to: " + pomodoroCount);
     }
 
-    /**
-     * Incremements the pomodoro count by 1.
-     */
     public void incrementPomodoroCount() {
-        this.pomodoroCount.set(this.pomodoroCount.get() + 1);
+        setPomodoroCount(getPomodoroCount() + 1);
     }
 
     /**
@@ -141,7 +146,6 @@ public class Task {
      */
     public void setCurrentStateKind(TaskStateKind currentStateKind) {
         currentState.setKind(currentStateKind);
-        logger.info("Task's state set to " + currentStateKind);
     }
 
     /**
@@ -169,7 +173,7 @@ public class Task {
      * where pointByDifficulty is difficultyLevel*10
      * @return the points
      */
-    public int getPoints() {
+    public int getRewardPoints() {
         if (currentState.getKind() == TaskStateKind.FINISHED && getPomodoroCount() != 0) {
             int pointByDifficulty = difficultyLevel*10;
             return Math.round(difficultyLevel/getPomodoroCount()*pointByDifficulty);
@@ -197,14 +201,11 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return difficultyLevel == task.difficultyLevel &&
-                Objects.equals(name, task.name) &&
-                Objects.equals(pomodoroCount, task.pomodoroCount) &&
-                Objects.equals(currentState, task.currentState);
+        return Objects.equals(id, task.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, difficultyLevel, pomodoroCount, currentState);
+        return Objects.hash(id);
     }
 }

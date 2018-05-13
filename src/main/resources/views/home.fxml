@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -12,13 +14,25 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="stack-pane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.HomeController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox">
+      <VBox prefWidth="450.0" styleClass="vbox">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="22.0" styleClass="tasks-label" text="Single Tasker">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="tasks-label" text="Single Tasker" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="16.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fx:id="settingsIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/settings.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="90.0" styleClass="new-task-field-holder">
                <children>
                   <TextField fx:id="newTaskField" onAction="#handleEnterOnNewTaskField" prefHeight="22.0" promptText="Add new task here..." styleClass="new-task-field" HBox.hgrow="ALWAYS">

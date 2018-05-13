@@ -81,8 +81,16 @@
     -fx-text-fill: rgb(220, 220, 220);
 }
 
+.list-cell .editBtn {
+    -fx-font-size: 25px;
+}
+
+.list-cell .removeBtn {
+    -fx-font-size: 14px;
+}
+
 .list-cell:empty {
-    -fx-border-color: #2c2c2c;
+    -fx-border-color: rgb(42,42,42);
 }
 
 .list-cell .finished .text-field,
@@ -92,5 +100,5 @@
 }
 
 .gray-2 {
-    -fx-text-fill: rgb(75, 75, 75);
+    -fx-text-fill: #767A7E;
 }
