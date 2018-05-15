@@ -1,3 +1,4 @@
+import singletasker.dao.TaskEntity;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
 import org.junit.jupiter.api.Assertions;
@@ -38,26 +39,15 @@ class TaskTest {
     }
 
     @Test
-    public void testSetDifficultyLevel() {
-        Assertions.assertDoesNotThrow(() -> task.setDifficultyLevel(1));
-        Assertions.assertDoesNotThrow(() -> task.setDifficultyLevel(10));
-        Assertions.assertThrows(DifficultyLevelRangeException.class, () -> task.setDifficultyLevel(11), "Difficulty must be between 0 and 10");
-        Assertions.assertThrows(DifficultyLevelRangeException.class, () -> task.setDifficultyLevel(0), "Difficulty must be between 0 and 10");
-
-        try {
-            task.setDifficultyLevel(1);
-        } catch (DifficultyLevelRangeException e) {}
-
-        Assertions.assertEquals(1, task.getDifficultyLevel());
-    }
-
-    @Test
     public void testIncrementPomodoroCount() {
         task.incrementPomodoroCount();
         Assertions.assertEquals(1, task.getPomodoroCount());
 
         task.incrementPomodoroCount();
         Assertions.assertEquals(2, task.getPomodoroCount());
+
+        task.incrementPomodoroCount();
+        Assertions.assertEquals(3, task.getPomodoroCount());
     }
 
     @Test
@@ -79,20 +69,14 @@ class TaskTest {
 
     @Test
     public void testGetPoints() {
-        Assertions.assertEquals(0, task.getRewardPoints());
+        Assertions.assertEquals(0, task.getRewardPoints(0));
 
         task.setCurrentStateKind(TaskStateKind.FINISHED);
 
-        Assertions.assertEquals(0, task.getRewardPoints());
+        Assertions.assertEquals(0, task.getRewardPoints(0));
 
         task.incrementPomodoroCount();
 
-        try {
-            task.setDifficultyLevel(1);
-        } catch (DifficultyLevelRangeException e) {
-            e.printStackTrace();
-        }
-
-        Assertions.assertEquals(10, task.getRewardPoints());
+        Assertions.assertEquals(10, task.getRewardPoints(1));
     }
 }

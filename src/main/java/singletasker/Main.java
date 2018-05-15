@@ -22,13 +22,18 @@ public class Main extends Application {
 
     private static DatabaseManager db = DatabaseManager.getInstance();
     private static Logger logger = LoggerFactory.getLogger(Main.class);
-    private final Service<Void> connectToDBService = new Service<>() {
+    private final Service<Void> connectToDBService = new Service<Void>() {
         @Override
         protected Task<Void> createTask() {
-            return new Task<>() {
+            return new Task<Void>() {
                 @Override
                 public Void call() {
-                    db.connect();
+                    try {
+                        db.connect();
+                    } catch (Exception e) {
+                        logger.error("Cannot connect to database, " + e.getMessage());
+                    }
+
                     return null;
                 }
             };
@@ -42,7 +47,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        connectToDBService.start();
+        connectToDBService.restart();
         setStageToSplashScene(primaryStage);
 
         connectToDBService.setOnRunning(event -> {
@@ -53,6 +58,7 @@ public class Main extends Application {
         connectToDBService.setOnSucceeded(event -> {
             connectToDBService.cancel();
             primaryStage.hide();
+            logger.info("Splash hidden");
             showHomeScreenStage();
         });
     }
@@ -86,7 +92,7 @@ public class Main extends Application {
         try {
             root = FXMLLoader.load(getClass().getResource("/views/home.fxml"));
         } catch (IOException|NullPointerException e) {
-            logger.error("Error while loading home.fxml, here's some further info: {}", e.getMessage());
+            logger.error("Error while loading home.fxml, here's some further info: " + e.getMessage());
         }
 
         stage.setScene(new Scene(root));

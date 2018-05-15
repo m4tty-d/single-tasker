@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="stack-pane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.HomeController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="stack-pane" xmlns="http://javafx.com/javafx/8.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.HomeController">
    <children>
       <VBox prefWidth="450.0" styleClass="vbox">
          <children>

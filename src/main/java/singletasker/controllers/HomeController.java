@@ -11,7 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import singletasker.dao.ConfigDAOImpl;
+import singletasker.dao.ConfigEntity;
 import singletasker.models.Task;
+import singletasker.models.TaskStateKind;
 import singletasker.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,18 +47,26 @@ public class HomeController implements Initializable {
     @FXML
     private ImageView settingsIcon;
 
-    private TaskListController taskListController = TaskListController.getInstance();
+    private User user = User.getInstance();
+
+    private TaskList taskList = TaskList.getInstance();
+
+    private ConfigDAOImpl configDAO = ConfigDAOImpl.getInstance();
 
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        taskListView.setItems(taskListController.getTasks());
-        logger.info("Setting up tasks");
+        setUpSettings();
+        logger.info("Settings set up");
 
-        // pointsLabel.textProperty().bind(user.totalPointsProperty().asString().concat(" points"));
-        // completedTasksLabel.textProperty().bind(user.completedTasksProperty().asString().concat(" completed tasks"));
-        // rankLabel.textProperty().bind(user.userRankProperty());
+        taskListView.setItems(taskList.getTasks());
+        logger.info("Tasks set up");
+
+        setUpUserConfigs();
+        logger.info("Configs set up");
+
+        setUpBindings();
 
         settingsIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             Stage settings = createSettingsStage();
@@ -65,6 +76,30 @@ public class HomeController implements Initializable {
 
         taskListView.setEditable(true);
         taskListView.setCellFactory(new TaskCellFactory());
+    }
+
+    private void setUpBindings() {
+        pointsLabel.textProperty().bind(user.totalPointsProperty().asString().concat(" points"));
+        completedTasksLabel.textProperty().bind(user.completedTasksProperty().asString().concat(" completed tasks"));
+        rankLabel.textProperty().bind(user.userRankProperty());
+    }
+
+    private void setUpUserConfigs() {
+        ConfigEntity userPoints = configDAO.findByKey("userPoints");
+        user.setTotalPoints(userPoints != null ? Integer.parseInt(userPoints.getConfigValue()) : 0);
+        user.setUserRankByPoint();
+
+        ConfigEntity userCompletedTasks = configDAO.findByKey("userCompletedTasks");
+        user.setCompletedTasks(userCompletedTasks != null ? Integer.parseInt(userCompletedTasks.getConfigValue()) : 0);
+    }
+
+    private void setUpSettings() {
+        ConfigEntity pomodoroTime = configDAO.findByKey("pomodoroTime");
+        TaskStateKind.FOCUS.setDurationInMinutes(pomodoroTime != null ? Integer.parseInt(pomodoroTime.getConfigValue()) : 25);
+        ConfigEntity shortBreakTime = configDAO.findByKey("shortBreakTime");
+        TaskStateKind.SHORT_BREAK.setDurationInMinutes(shortBreakTime != null ? Integer.parseInt(shortBreakTime.getConfigValue()) : 5);
+        ConfigEntity longBreakTime = configDAO.findByKey("longBreakTime");
+        TaskStateKind.LONG_BREAK.setDurationInMinutes(longBreakTime != null ? Integer.parseInt(longBreakTime.getConfigValue()) : 15);
     }
 
     private Stage createSettingsStage() {
@@ -87,7 +122,7 @@ public class HomeController implements Initializable {
     void handleEnterOnNewTaskField(ActionEvent event) {
         if (newTaskFieldNotEmpty()) {
             String text = newTaskField.getText();
-            taskListController.addTask(new Task(text));
+            taskList.addTask(new Task(text));
             logger.info("New task handled with name: " + text);
             emptyNewTaskField();
         }

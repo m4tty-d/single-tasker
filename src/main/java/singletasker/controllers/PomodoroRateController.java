@@ -6,13 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
-import singletasker.dao.UserDAOImpl;
+import singletasker.dao.ConfigDAOImpl;
+import singletasker.dao.ConfigEntity;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
-import singletasker.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import singletasker.utils.DifficultyLevelRangeException;
+import singletasker.models.User;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +33,12 @@ public class PomodoroRateController implements Initializable {
 
     private Task task;
 
+    private User user = User.getInstance();
+
+    private ConfigDAOImpl configDAO = ConfigDAOImpl.getInstance();
+
+    private TaskList taskList = TaskList.getInstance();
+
     private Logger logger = LoggerFactory.getLogger(PomodoroController.class);
 
     @Override
@@ -48,16 +54,15 @@ public class PomodoroRateController implements Initializable {
     }
 
     public void handleFinish(ActionEvent event) {
-        try {
-            task.setDifficultyLevel((int) difficultySlider.getValue());
-        } catch (DifficultyLevelRangeException e) {
-            logger.error(e.getMessage());
-        }
         task.getCurrentState().setKind(TaskStateKind.FINISHED);
-        // User user = new User();
-        // user.addToTotalPoints(task.getRewardPoints());
-        // user.incrementCompletedTasks();
-        // userController.update(user);
+
+        int difficulty = (int) difficultySlider.getValue();
+        user.addToTotalPoints(task.getRewardPoints(difficulty));
+        configDAO.save(new ConfigEntity("userTotalPoints", String.valueOf(user.getTotalPoints())));
+        user.incrementCompletedTasks();
+        configDAO.save(new ConfigEntity("userCompletedTasks", String.valueOf(user.getCompletedTasks())));
+
+        taskList.updateTask(task);
 
         root.getScene().getWindow().hide();
         logger.info("Pomodoro rating finished");

@@ -7,12 +7,13 @@
     <groupId>hu.unideb.inf</groupId>
     <artifactId>single-tasker</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEnconding>UTF-8</project.reporting.outputEnconding>
-        <maven.compiler.source>1.9</maven.compiler.source>
-        <maven.compiler.target>1.9</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <mainClass>singletasker.Main</mainClass>
     </properties>
 
@@ -59,14 +60,18 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
-            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
         </dependency>
 
         <dependency>
@@ -78,26 +83,19 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.10.Final</version>
+            <version>5.2.13.Final</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.2.10.Final</version>
+            <version>5.2.13.Final</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.12.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
-            <scope>runtime</scope>
+            <version>10.14.2.0</version>
         </dependency>
     </dependencies>
 
@@ -141,8 +139,8 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[1.9,)</version>
-                                    <message>JDK 9 or later is required!</message>
+                                    <version>[1.8,)</version>
+                                    <message>JDK 8 or later is required!</message>
                                 </requireJavaVersion>
                                 <requireProperty>
                                     <property>java.vendor</property>
@@ -195,6 +193,7 @@
                 <configuration>
                     <excludes>
                         <exclude>/singletasker/controllers/*</exclude>
+                        <exclude>/singletasker/dao/*</exclude>
                         <exclude>/singletasker/Main.class</exclude>
                         <exclude>/singletasker/utils/*</exclude>
                     </excludes>
@@ -241,6 +240,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/controllers/*.java</exclude>
+                        <exclude>**/dao/*.java</exclude>
                         <exclude>**/utils/*.java</exclude>
                         <exclude>**/Main.java</exclude>
                     </excludes>
@@ -279,7 +279,7 @@
                 <version>2.17</version>
                 <configuration>
                     <configLocation>src/main/resources/checkstyle.xml</configLocation>
-                    <excludes>/singletasker/controllers/*,/singletasker/utils/*</excludes>
+                    <excludes>/singletasker/controllers/*,/singletasker/utils/*,/singletasker/Main.java</excludes>
                 </configuration>
             </plugin>
             <plugin>

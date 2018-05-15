@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.PomodoroRateController">
+<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.PomodoroRateController">
    <children>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="385.0" text="How hard was it to complete the task?">
          <VBox.margin>

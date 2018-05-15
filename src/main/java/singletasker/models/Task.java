@@ -2,6 +2,7 @@ package singletasker.models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import singletasker.dao.TaskEntity;
 import singletasker.utils.DifficultyLevelRangeException;
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,14 +10,10 @@ import java.util.Objects;
 /**
  * Represents a task.
  */
-@Entity
-@Table(name="TASKS")
 public class Task {
     /**
      * Id of the task.
      */
-    @Id
-    @GeneratedValue
     private Long id;
 
     /**
@@ -25,21 +22,13 @@ public class Task {
     private String name;
 
     /**
-     * Difficulty level of the task. (1-10)
-     */
-    @Transient
-    private int difficultyLevel;
-
-    /**
      * The count of the pomodoros. A pomodoro is basically a work session.
      */
-    @Transient
     private IntegerProperty pomodoroCount;
 
     /**
      * The current state of the task.
      */
-    @Embedded
     private TaskState currentState;
 
     /**
@@ -47,7 +36,6 @@ public class Task {
      */
     public Task() {
         this.currentState = new TaskState(TaskStateKind.FOCUS);
-        this.difficultyLevel = 0;
         this.pomodoroCount = new SimpleIntegerProperty(0);
     }
 
@@ -61,11 +49,30 @@ public class Task {
     }
 
     /**
-     * Gets the task's id.
-     * @return the id of the task
+     * Contrustor which sets the properties from a {@link TaskEntity} instance.
+     * @param te {@link TaskEntity} instance
+     */
+    public Task(TaskEntity te) {
+        this.id = te.getId();
+        this.name = te.getName();
+        this.pomodoroCount = new SimpleIntegerProperty(te.getPomodoroCount());
+        this.currentState = new TaskState(te.getCurrentState());
+    }
+
+    /**
+     * Gets the id of the task.
+     * @return id of the task
      */
     public Long getId() {
         return id;
+    }
+
+    /**
+     * Sets the id of the task.
+     * @param id the id to be set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -85,49 +92,33 @@ public class Task {
     }
 
     /**
-     * Gets the task's difficulty level.
-     * The difficulty is an integer ranged between 0 and 10, it is used to calculate the point which the user gets.
-     * From it we can measure how hard was the task for the user.
-     * @return the difficulty level of the task
-     */
-    public int getDifficultyLevel() {
-        return difficultyLevel;
-    }
-
-    /**
-     * Sets the task's difficulty level.
-     * The difficulty is an integer ranged between 0 and 10, it is used to calculate the point which the user gets.
-     * From it we can measure how hard was the task for the user.
-     * @param difficultyLevel integer between 0 and 10, used to calculate the point
-     * @throws DifficultyLevelRangeException if difficultyLevel is not in the correct range
-     */
-    public void setDifficultyLevel(int difficultyLevel) throws DifficultyLevelRangeException {
-        if (difficultyLevel < 1 || difficultyLevel > 10) {
-            throw new DifficultyLevelRangeException("Difficulty must be between 1 and 10");
-        } else {
-            this.difficultyLevel = difficultyLevel;
-        }
-    }
-
-
-    /**
      * Gets the task's pomodoro count.
      * A pomodoro is a work session.
      * @return the pomodoro count
      */
-    @Access(AccessType.PROPERTY)
     public int getPomodoroCount() {
         return pomodoroCount.get();
     }
 
+    /**
+     * Gets the reactive property instance.
+     * @return the reactive property
+     */
     public IntegerProperty pomodoroCountProperty() {
         return pomodoroCount;
     }
 
+    /**
+     * Sets the pomodoro count.
+     * @param pomodoroCount number of pomodoros
+     */
     public void setPomodoroCount(int pomodoroCount) {
         this.pomodoroCount.set(pomodoroCount);
     }
 
+    /**
+     * Increments the pomodoro count by 1.
+     */
     public void incrementPomodoroCount() {
         setPomodoroCount(getPomodoroCount() + 1);
     }
@@ -142,7 +133,7 @@ public class Task {
 
     /**
      * Sets the current state's kind.
-     * @param currentStateKind
+     * @param currentStateKind the state to be set
      */
     public void setCurrentStateKind(TaskStateKind currentStateKind) {
         currentState.setKind(currentStateKind);
@@ -171,9 +162,10 @@ public class Task {
      * The point is calculated from the difficulty level and the count of the pomodoros, with the following formula:
      * difficultyLevel / pomodoroCount * pointByDifficulty
      * where pointByDifficulty is difficultyLevel*10
+     * @param difficultyLevel how hard was the task to complete (1-10)
      * @return the points
      */
-    public int getRewardPoints() {
+    public int getRewardPoints(int difficultyLevel) {
         if (currentState.getKind() == TaskStateKind.FINISHED && getPomodoroCount() != 0) {
             int pointByDifficulty = difficultyLevel*10;
             return Math.round(difficultyLevel/getPomodoroCount()*pointByDifficulty);
@@ -190,7 +182,6 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "name='" + name + '\'' +
-                ", difficultyLevel=" + difficultyLevel +
                 ", pomodoroCount=" + pomodoroCount +
                 ", currentState=" + currentState +
                 '}';

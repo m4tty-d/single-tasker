@@ -5,12 +5,15 @@ import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import singletasker.dao.TaskDAOImpl;
+import singletasker.dao.TaskEntity;
 import singletasker.models.Task;
+
+import java.util.stream.Collectors;
 
 /**
  * Represents the task list.
  */
-public class TaskListController {
+public class TaskList {
 
     /**
      * Stores the tasks.
@@ -20,32 +23,30 @@ public class TaskListController {
     /**
      * The task list's instance.
      */
-    private static TaskListController instance = null;
+    private static TaskList instance = null;
 
-    /**
-     *
-     */
+
     private TaskDAOImpl dao = TaskDAOImpl.getInstance();
 
     /**
      * Logger instance used for logging.
      */
-    private Logger logger = LoggerFactory.getLogger(TaskListController.class);
+    private Logger logger = LoggerFactory.getLogger(TaskList.class);
 
     /**
      *
      */
-    private TaskListController() {
-        tasks = FXCollections.observableArrayList(dao.findAll());
+    private TaskList() {
+        tasks = FXCollections.observableArrayList(dao.findAll().stream().map(te -> new Task(te)).collect(Collectors.toList()));
     }
 
     /**
-     * Creates the TaskListController instance or returns it if it's already created.
+     * Creates the TaskList instance or returns it if it's already created.
      * @return the task list instance
      */
-    public static TaskListController getInstance() {
+    public static TaskList getInstance() {
         if (instance == null) {
-            instance = new TaskListController();
+            instance = new TaskList();
         }
 
         return instance;
@@ -56,9 +57,9 @@ public class TaskListController {
      * @param t the task to be added
      */
     public void addTask(Task t) {
-        tasks.add(0, t);
-        dao.insert(t);
-        logger.info("Task added to TaskListController with name: " + t.getName());
+        tasks.add(t);
+        dao.insert(new TaskEntity(t));
+        logger.info("Task added to TaskList with name: " + t.getName());
     }
 
     /**
@@ -67,7 +68,7 @@ public class TaskListController {
      */
     public void removeTask(Task t) {
         tasks.remove(t);
-        dao.delete(t);
+        dao.delete(t.getId());
         logger.info("Task removed from list named: " + t.getName());
     }
 
@@ -75,7 +76,7 @@ public class TaskListController {
         if (tasks.contains(t)) {
             int index = tasks.indexOf(t);
             tasks.set(index, t);
-            dao.update(t);
+            dao.update(new TaskEntity(t));
         }
     }
 

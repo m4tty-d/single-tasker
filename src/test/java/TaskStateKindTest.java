@@ -20,4 +20,13 @@ public class TaskStateKindTest {
         taskStateKind = TaskStateKind.FINISHED;
         Assertions.assertEquals(TaskStateKind.FINISHED.getMotivationalText(), taskStateKind.getMotivationalText());
     }
+
+    @Test
+    public void testSetDurationInMinutes() {
+        TaskStateKind.FOCUS.setDurationInMinutes(30);
+        Assertions.assertEquals(30, TaskStateKind.FOCUS.getDurationInMinutes());
+
+        TaskStateKind.SHORT_BREAK.setDurationInMinutes(10);
+        Assertions.assertEquals(10, TaskStateKind.SHORT_BREAK.getDurationInMinutes());
+    }
 }

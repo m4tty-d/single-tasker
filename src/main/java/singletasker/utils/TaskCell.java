@@ -10,7 +10,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-import singletasker.controllers.TaskListController;
+import singletasker.controllers.TaskList;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ class TaskCell extends ListCell<Task> {
     private final Label pomodoroCountLabel = new Label("0");
     private static Stage pomodoroStage;
 
-    private TaskListController taskListController = TaskListController.getInstance();
+    private TaskList taskList = TaskList.getInstance();
 
     private Logger logger = LoggerFactory.getLogger(TaskCell.class);
 
@@ -65,6 +65,10 @@ class TaskCell extends ListCell<Task> {
             setGraphic(null);
         } else {
             getHBoxsTextField().setText(task.getName());
+            if (task.getCurrentState().getKind() == TaskStateKind.FINISHED) {
+                taskStateSymbol.setText("✓");
+                hBox.getStyleClass().add("finished");
+            }
 
             setGraphic(hBox);
         }
@@ -91,7 +95,7 @@ class TaskCell extends ListCell<Task> {
 
         textField.setOnAction(event -> {
             getItem().setName(getHBoxsTextField().getText());
-            taskListController.updateTask(getItem());
+            taskList.updateTask(getItem());
             hBox.requestFocus();
         });
     }
@@ -109,7 +113,7 @@ class TaskCell extends ListCell<Task> {
 
     private void handleRemoveBtnClick() {
         removeBtn.setOnAction(event -> {
-            taskListController.removeTask(getItem());
+            taskList.removeTask(getItem());
             logger.info("Task removed");
         });
     }

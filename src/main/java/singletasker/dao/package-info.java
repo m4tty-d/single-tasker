@@ -1,4 +1,4 @@
 /**
- * This package holds the dao classes.
+ * Contains the dao classes.
  */
 package singletasker.dao;

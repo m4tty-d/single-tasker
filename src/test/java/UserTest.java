@@ -11,12 +11,11 @@ public class UserTest {
     private User user;
 
     @BeforeEach
-    public void setup() {
-        /*Field instance = User.class.getDeclaredField("instance");
+    public void setup() throws NoSuchFieldException, IllegalAccessException {
+        Field instance = User.class.getDeclaredField("instance");
         instance.setAccessible(true);
         instance.set(null, null);
-        user = User.getInstance();*/
-        user = new User();
+        user = User.getInstance();
     }
 
     @Test

@@ -1,16 +1,30 @@
 package singletasker.dao;
 
-import singletasker.models.Task;
-
 import java.util.List;
 
+/**
+ * Encapsulates the database operations on {@link TaskEntity}.
+ */
 public class TaskDAOImpl implements TaskDAO {
-
+    /**
+     * The TaskDAOImpl instance.
+     */
     private static TaskDAOImpl instance;
+
+    /**
+     * {@link DatabaseManager} instance.
+     */
     private static DatabaseManager db = DatabaseManager.getInstance();
 
+    /**
+     * Disabled because of singleton.
+     */
     private TaskDAOImpl() {}
 
+    /**
+     * Creates the TaskDAOImpl instance or returns it if it's already created.
+     * @return the instance
+     */
     public static TaskDAOImpl getInstance() {
         if (instance == null) {
             instance = new TaskDAOImpl();
@@ -19,53 +33,66 @@ public class TaskDAOImpl implements TaskDAO {
         return instance;
     }
 
+    /**
+     * Inserts a {@link TaskEntity} into the database.
+     * @param taskEntity the {@link TaskEntity} to be inserted
+     */
     @Override
-    public boolean insert(Task task) {
-        if (task != null) {
+    public void insert(TaskEntity taskEntity) {
+        if (taskEntity != null) {
             db.getEntityManager().getTransaction().begin();
-            db.getEntityManager().persist(task);
-            db.getEntityManager().getTransaction().commit();
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean update(Task task) {
-        if (task != null) {
-            db.getEntityManager().getTransaction().begin();
-            db.getEntityManager().merge(task);
-            db.getEntityManager().getTransaction().commit();
-
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean delete(Task task) {
-        if (task != null) {
-            db.getEntityManager().getTransaction().begin();
-            db.getEntityManager().remove(task);
+            db.getEntityManager().persist(taskEntity);
             db.getEntityManager().getTransaction().commit();
         }
-        return false;
     }
 
+    /**
+     * Updates a {@link TaskEntity}.
+     * @param taskEntity the {@link TaskEntity} to be updated
+     */
     @Override
-    public Task findById(Long id) {
+    public void update(TaskEntity taskEntity) {
+        if (taskEntity != null) {
+            db.getEntityManager().getTransaction().begin();
+            db.getEntityManager().merge(taskEntity);
+            db.getEntityManager().getTransaction().commit();
+        }
+    }
+
+    /**
+     * Deletes a {@link TaskEntity} by id.
+     * @param id the id
+     */
+    @Override
+    public void delete(Long id) {
         if (id != null) {
             db.getEntityManager().getTransaction().begin();
-            Task t = db.getEntityManager().find(Task.class, id);
+            db.getEntityManager().createQuery("delete from TaskEntity where id = :id").setParameter("id", id).executeUpdate();
+            db.getEntityManager().getTransaction().commit();
+        }
+    }
+
+    /**
+     * Gets a {@link TaskEntity} by id.
+     * @param id the id of the wanted {@link TaskEntity}
+     * @return the instance, or null if wasn't found
+     */
+    @Override
+    public TaskEntity findById(Long id) {
+        if (id != null) {
+            db.getEntityManager().getTransaction().begin();
+            TaskEntity t = db.getEntityManager().find(TaskEntity.class, id);
             return t;
         }
         return null;
     }
 
+    /**
+     * Gets all {@link TaskEntity}'s.
+     * @return a list of the rows
+     */
     @Override
-    public List<Task> findAll() {
-        return db.getEntityManager().createQuery("from Task", Task.class).getResultList();
+    public List<TaskEntity> findAll() {
+        return db.getEntityManager().createQuery("from TaskEntity", TaskEntity.class).getResultList();
     }
 }

@@ -10,25 +10,20 @@ import javax.persistence.*;
 /**
  * Represents a task state.
  */
-@Embeddable
-@Access(AccessType.FIELD)
 public class TaskState {
     /**
      * The type of the state.
      */
-    @Transient
     private ObjectProperty<TaskStateKind> kind = new SimpleObjectProperty<>();
 
     /**
      * The remaining seconds.
      */
-    @Transient
     private int remainingSeconds;
 
     /**
      * Logger instance for logging.
      */
-    @Transient
     private Logger logger = LoggerFactory.getLogger(TaskState.class);
 
     /**
@@ -56,6 +51,14 @@ public class TaskState {
     }
 
     /**
+     * Sets the remaining seconds.
+     * @param remainingSeconds the remaining seconds to set
+     */
+    public void setRemainingSeconds(int remainingSeconds) {
+        this.remainingSeconds = remainingSeconds;
+    }
+
+    /**
      * Decrements the remaining seconds by 1.
      */
     public void tickRemainingSeconds() {
@@ -68,15 +71,13 @@ public class TaskState {
      */
     public void setKind(TaskStateKind kind) {
         this.kind.set(kind);
-        this.remainingSeconds = getKind().getDurationInSeconds();
+        setRemainingSeconds(getKind().getDurationInSeconds());
     }
 
     /**
      * Gets the type of the task's state.
      * @return the state of the task
      */
-    @Access(AccessType.PROPERTY)
-    @Enumerated(EnumType.ORDINAL)
     public TaskStateKind getKind() {
         return kind.get();
     }

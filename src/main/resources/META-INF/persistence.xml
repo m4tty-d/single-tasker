@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
-        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
     <persistence-unit name="stDB" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>singletasker.models.Task</class>
+        <class>singletasker.dao.TaskEntity</class>
+        <class>singletasker.dao.ConfigEntity</class>
         <properties>
             <property name="hibernate.archive.autodetection" value="class" />
             <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver" />
             <property name="hibernate.connection.url" value="jdbc:derby:stDB;create=true" />
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="root"/>
+            <property name="hibernate.flushMode" value="FLUSH_AUTO" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <!--<property name="hibernate.show_sql" value="true"/>-->
             <!--<property name="hibernate.format_sql" value="true" />-->
         </properties>

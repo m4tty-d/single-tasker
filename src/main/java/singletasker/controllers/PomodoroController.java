@@ -44,8 +44,6 @@ public class PomodoroController implements Initializable {
     private StringProperty timerText;
     private Timeline timeline;
 
-    private TaskListController taskListController = TaskListController.getInstance();
-
     private Logger logger = LoggerFactory.getLogger(PomodoroController.class);
 
     public PomodoroController() {
@@ -137,7 +135,6 @@ public class PomodoroController implements Initializable {
         timeline.setOnFinished(event -> {
             logger.info("Pomodoro timer stopped");
             task.setNextState();
-            taskListController.updateTask(task);
             setTaskStateLabelText();
             prepareTimer();
         });

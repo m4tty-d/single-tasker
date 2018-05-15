@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.SettingsController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="singletasker.controllers.SettingsController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="380.0" text="Settings">
          <VBox.margin>

@@ -1,12 +1,11 @@
 package singletasker.dao;
 
-
 import java.util.List;
 
 public interface DAO<T, S> {
-    boolean insert(T t);
-    boolean update(T t);
-    boolean delete(T t);
+    void insert(T t);
+    void update(T t);
+    void delete(S id);
     T findById(S id);
     List<T> findAll();
 }
