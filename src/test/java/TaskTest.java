@@ -1,10 +1,8 @@
-import singletasker.dao.TaskEntity;
-import singletasker.models.Task;
-import singletasker.models.TaskStateKind;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import singletasker.utils.DifficultyLevelRangeException;
+import singletasker.models.Task;
+import singletasker.models.TaskStateKind;
 
 class TaskTest {
     private Task task;

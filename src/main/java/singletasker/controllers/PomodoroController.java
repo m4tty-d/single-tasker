@@ -15,9 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import singletasker.models.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import singletasker.models.Task;
 
 import java.io.IOException;
 import java.net.URL;

@@ -3,8 +3,7 @@ package singletasker.models;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import singletasker.dao.TaskEntity;
-import singletasker.utils.DifficultyLevelRangeException;
-import javax.persistence.*;
+
 import java.util.Objects;
 
 /**

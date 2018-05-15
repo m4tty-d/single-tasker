@@ -11,13 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import singletasker.dao.ConfigDAOImpl;
 import singletasker.dao.ConfigEntity;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
 import singletasker.models.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import singletasker.utils.TaskCellFactory;
 
 import java.io.IOException;

@@ -5,8 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.*;
-
 /**
  * Represents a task state.
  */

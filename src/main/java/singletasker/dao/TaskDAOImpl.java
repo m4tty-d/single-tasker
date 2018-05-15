@@ -1,9 +1,12 @@
 package singletasker.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
- * Encapsulates the database operations on {@link TaskEntity}.
+ * Encapsulates the implementation of database operations on {@link TaskEntity}.
  */
 public class TaskDAOImpl implements TaskDAO {
     /**
@@ -15,6 +18,11 @@ public class TaskDAOImpl implements TaskDAO {
      * {@link DatabaseManager} instance.
      */
     private static DatabaseManager db = DatabaseManager.getInstance();
+
+    /**
+     * Logger used for logging.
+     */
+    private Logger logger = LoggerFactory.getLogger(ConfigDAOImpl.class);
 
     /**
      * Disabled because of singleton.

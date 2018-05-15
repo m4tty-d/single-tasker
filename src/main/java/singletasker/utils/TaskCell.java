@@ -1,20 +1,24 @@
 package singletasker.utils;
 
-import singletasker.controllers.PomodoroController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import singletasker.controllers.PomodoroController;
 import singletasker.controllers.TaskList;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 

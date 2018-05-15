@@ -6,12 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import singletasker.dao.ConfigDAOImpl;
 import singletasker.dao.ConfigEntity;
 import singletasker.models.Task;
 import singletasker.models.TaskStateKind;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import singletasker.models.User;
 
 import java.net.URL;

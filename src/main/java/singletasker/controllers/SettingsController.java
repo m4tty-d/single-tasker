@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import org.apache.maven.settings.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import singletasker.dao.ConfigDAOImpl;

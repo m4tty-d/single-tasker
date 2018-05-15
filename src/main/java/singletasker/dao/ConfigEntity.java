@@ -1,6 +1,9 @@
 package singletasker.dao;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="CONFIG")
@@ -38,5 +41,14 @@ public class ConfigEntity {
 
     public void setConfigValue(String value) {
         this.configValue = value;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigEntity{" +
+                "Id=" + Id +
+                ", configKey='" + configKey + '\'' +
+                ", configValue='" + configValue + '\'' +
+                '}';
     }
 }
