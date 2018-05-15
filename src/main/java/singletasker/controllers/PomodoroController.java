@@ -129,7 +129,7 @@ public class PomodoroController implements Initializable {
         setTimerText(task.getCurrentState().getRemainingSeconds());
         timeline.setCycleCount(task.getCurrentState().getRemainingSeconds());
 
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), event -> {
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.001), event -> {
             task.getCurrentState().tickRemainingSeconds();
             setTimerText(task.getCurrentState().getRemainingSeconds());
         }));

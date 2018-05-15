@@ -34,7 +34,7 @@ public class TaskList {
     private Logger logger = LoggerFactory.getLogger(TaskList.class);
 
     /**
-     *
+     * Disabled because we need only one instance.
      */
     private TaskList() {
         tasks = FXCollections.observableArrayList(dao.findAll().stream().map(te -> new Task(te)).collect(Collectors.toList()));
@@ -53,17 +53,17 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list.
+     * Adds a task to the list, and the db.
      * @param t the task to be added
      */
     public void addTask(Task t) {
-        tasks.add(t);
-        dao.insert(new TaskEntity(t));
+        TaskEntity te = dao.insert(new TaskEntity(t));
+        tasks.add(new Task(te));
         logger.info("Task added to TaskList with name: " + t.getName());
     }
 
     /**
-     * Removes a task from the list.
+     * Removes a task from the list, and the db.
      * @param t the task to be removed
      */
     public void removeTask(Task t) {
@@ -72,6 +72,10 @@ public class TaskList {
         logger.info("Task removed from list named: " + t.getName());
     }
 
+    /**
+     * Updates a task in the list and the db as well.
+     * @param t task to be updated
+     */
     public void updateTask(Task t) {
         if (tasks.contains(t)) {
             int index = tasks.indexOf(t);

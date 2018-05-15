@@ -2,6 +2,7 @@ package singletasker.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import singletasker.models.Task;
 
 import java.util.List;
 
@@ -46,12 +47,15 @@ public class TaskDAOImpl implements TaskDAO {
      * @param taskEntity the {@link TaskEntity} to be inserted
      */
     @Override
-    public void insert(TaskEntity taskEntity) {
+    public TaskEntity insert(TaskEntity taskEntity) {
         if (taskEntity != null) {
             db.getEntityManager().getTransaction().begin();
             db.getEntityManager().persist(taskEntity);
             db.getEntityManager().getTransaction().commit();
+            return taskEntity;
         }
+
+        return null;
     }
 
     /**

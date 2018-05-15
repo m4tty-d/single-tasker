@@ -16,6 +16,10 @@ public class ConfigDAOImpl implements ConfigDAO {
 
     private ConfigDAOImpl() {}
 
+    /**
+     * Creates the ConfigDAOImpl instance or returns it if it's already created.
+     * @return the instance
+     */
     public static ConfigDAOImpl getInstance() {
         if (instance == null) {
             instance = new ConfigDAOImpl();
@@ -24,11 +28,6 @@ public class ConfigDAOImpl implements ConfigDAO {
         return instance;
     }
 
-    /**
-     * Gets the {@link ConfigEntity} by key.
-     * @param key
-     * @return
-     */
     @Override
     public ConfigEntity findByKey(String key) {
         if (key != null) {
@@ -49,10 +48,6 @@ public class ConfigDAOImpl implements ConfigDAO {
         return null;
     }
 
-    /**
-     * Saves a a config entity. If it's already in the database it's beeing updated, otherwise inserted.
-     * @param configEntity the config to be saved
-     */
     @Override
     public void save(ConfigEntity configEntity) {
         if (findByKey(configEntity.getConfigKey()) != null) {

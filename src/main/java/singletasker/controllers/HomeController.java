@@ -85,7 +85,7 @@ public class HomeController implements Initializable {
     }
 
     private void setUpUserConfigs() {
-        ConfigEntity userPoints = configDAO.findByKey("userPoints");
+        ConfigEntity userPoints = configDAO.findByKey("userTotalPoints");
         user.setTotalPoints(userPoints != null ? Integer.parseInt(userPoints.getConfigValue()) : 0);
         user.setUserRankByPoint();
 

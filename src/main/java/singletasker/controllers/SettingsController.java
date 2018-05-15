@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for the settings view.
+ */
 public class SettingsController implements Initializable {
 
     @FXML

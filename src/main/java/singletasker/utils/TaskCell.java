@@ -69,10 +69,6 @@ class TaskCell extends ListCell<Task> {
             setGraphic(null);
         } else {
             getHBoxsTextField().setText(task.getName());
-            if (task.getCurrentState().getKind() == TaskStateKind.FINISHED) {
-                taskStateSymbol.setText("✓");
-                hBox.getStyleClass().add("finished");
-            }
 
             setGraphic(hBox);
         }
@@ -141,7 +137,7 @@ class TaskCell extends ListCell<Task> {
 
         PomodoroController controller = loader.getController();
         controller.setTask(selectedTask);
-        logger.info("Task sent to Pomodoro");
+        logger.info("Task sent to Pomodoro controller");
 
         return stage;
     }
@@ -149,14 +145,20 @@ class TaskCell extends ListCell<Task> {
     private void setBindings() {
         itemProperty().addListener((obs, oldItem, newItem) -> {
             if (oldItem == null && newItem != null) {
+                // setFinishedStyle(newItem, getItem().getCurrentState().getKind());
+
                 pomodoroCountLabel.textProperty().bind(getItem().pomodoroCountProperty().asString());
                 newItem.getCurrentState().kindProperty().addListener((o, oldVal, newVal) -> {
-                    if (getItem() != null && getItem().equals(newItem) && newVal == TaskStateKind.FINISHED) {
-                        taskStateSymbol.setText("✓");
-                        hBox.getStyleClass().add("finished");
-                    }
+                    setFinishedStyle(newItem, newVal);
                 });
             }
         });
+    }
+
+    private void setFinishedStyle(Task newItem, TaskStateKind kind) {
+        if (getItem() != null && getItem().equals(newItem) && kind == TaskStateKind.FINISHED) {
+            taskStateSymbol.setText("✓");
+            hBox.getStyleClass().add("finished");
+        }
     }
 }

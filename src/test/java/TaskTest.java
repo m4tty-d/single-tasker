@@ -13,6 +13,18 @@ class TaskTest {
     }
 
     @Test
+    public void testSetId() {
+        task.setId(0L);
+        Assertions.assertEquals(0L, task.getId().longValue());
+
+        task.setId(100L);
+        Assertions.assertEquals(100L, task.getId().longValue());
+
+        task.setId(5L);
+        Assertions.assertEquals(5L, task.getId().longValue());
+    }
+
+    @Test
     public void testSetName() {
         task.setName("test");
         Assertions.assertEquals("test", task.getName());
