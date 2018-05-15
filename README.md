@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.com/m4tty-d/single-tasker.svg?token=u8qaYxSWoeJmov6MB6BK&branch=master)](https://travis-ci.com/m4tty-d/single-tasker)
 [![codecov](https://codecov.io/gh/m4tty-d/single-tasker/branch/master/graph/badge.svg?token=6oD8GoQbqT)](https://codecov.io/gh/m4tty-d/single-tasker)
-[![Java Version](https://img.shields.io/badge/jdk-9-blue.svg)](https://docs.oracle.com/javase/9/)
-[![Maven](https://img.shields.io/badge/tool-maven-ec702f.svg)](https://maven.apache.org)
-[![jUnit](https://img.shields.io/badge/junit-jupiter-25a162.svg)](https://maven.apache.org)
+[![Java Version](https://img.shields.io/badge/jdk-8-blue.svg)](https://docs.oracle.com/javase/8/)
+[![Maven](https://img.shields.io/badge/tool-maven-ec702f.svg)](https://maven.apache.org/)
+[![jUnit](https://img.shields.io/badge/junit-jupiter-25a162.svg)](https://junit.org/junit5/)
 
 Single Tasker
 ======
@@ -15,21 +15,21 @@ The project was created for the Programming Technologies and Programming Environ
 
 ## How to run 
 
-You can run the program with the following command:
-
-```bash
-$ mvn compile exec:java
-```
-
-Or you can create the jars (normal and Uber) with:
+You have to create the jars:
 
 ```bash
 $ mvn package
 ```
 
+After the above's completion you can run it:
+
+```bash
+$ java -jar ./target/single-tasker-1.0-jar-with-dependencies.jar
+```
+
 ## Documentation
 
-The documentation can be generated with:
+The documentation and reports can be generated with:
 
 ```bash
 $ mvn site
